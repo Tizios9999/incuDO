@@ -40,6 +40,11 @@ public class Prenotazioni {
 	public void setDataFine(LocalDate dataFine) {
 		this.dataFine = dataFine;
 	}
+	@Override
+	public String toString() {
+		return "Prenotazioni [id=" + id + ", idAttività=" + idAttività + ", idUtente=" + idUtente + ", dataInizio="
+				+ dataInizio + ", dataFine=" + dataFine + "]";
+	}
 	
 	
 }

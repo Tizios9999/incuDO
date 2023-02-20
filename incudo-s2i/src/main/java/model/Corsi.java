@@ -54,6 +54,11 @@ public class Corsi {
 	public void setDisponibile(boolean disponibile) {
 		this.disponibile = disponibile;
 	}
+	@Override
+	public String toString() {
+		return "Corsi [id=" + id + ", nome=" + nome + ", descrizione=" + descrizione + ", data=" + data + ", durata="
+				+ durata + ", luogo=" + luogo + ", disponibile=" + disponibile + "]";
+	}
 	
 	
 }

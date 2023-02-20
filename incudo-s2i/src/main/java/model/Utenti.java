@@ -47,5 +47,10 @@ public class Utenti {
 	public void setDocumentoId(String documentoId) {
 		this.documentoId = documentoId;
 	}
+	@Override
+	public String toString() {
+		return "Utenti [id=" + id + ", Nome=" + Nome + ", Cognome=" + Cognome + ", dataNascita=" + dataNascita
+				+ ", indirizzo=" + indirizzo + ", documentoId=" + documentoId + "]";
+	}
 	
 }

@@ -20,6 +20,4 @@ public class UtentiDaoImpl implements UtentiDao {
 		System.out.println("Caricamento utenti");
 	}
 	
-	
-	
 }

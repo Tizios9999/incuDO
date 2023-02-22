@@ -1,6 +1,6 @@
 package dao;
 
-public class PrenotazioniDaoImpl implements PrenotazioniDao {
+public class PrenotazioneDaoImpl implements PrenotazioneDao {
 
 	public void togglePrenotazione(Integer idCorso, Integer idUtente) {
 		// TODO Auto-generated method stub

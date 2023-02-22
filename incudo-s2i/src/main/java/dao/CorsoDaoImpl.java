@@ -1,6 +1,6 @@
 package dao;
 
-public class CorsiDaoImpl {
+public class CorsoDaoImpl {
 	
 	public void caricaCorsi(String CSVpath) {
 		

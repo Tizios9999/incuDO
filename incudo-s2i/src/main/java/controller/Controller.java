@@ -2,12 +2,16 @@ package controller;
 
 import java.util.Scanner;
 
+import dao.UtenteDaoImpl;
+
 public class Controller {
 	
 	public void start() {
 		
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
+		
+		UtenteDaoImpl dao = new UtenteDaoImpl();
 		
 		String choice;
 		
@@ -28,6 +32,8 @@ public class Controller {
 		System.out.println("+--------+----------------------------------------------------+");
 		System.out.println("|0   	 | Uscire dal programma                               |");
 		System.out.println("+--------+----------------------------------------------------+");
+		
+		dao.caricaUtenti("prova");
 		
 		do {
 		

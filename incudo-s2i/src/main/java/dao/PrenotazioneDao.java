@@ -1,6 +1,6 @@
 package dao;
 
-public interface PrenotazioniDao {
+public interface PrenotazioneDao {
 	
 	public void togglePrenotazione(Integer idCorso, Integer idUtente);
 	

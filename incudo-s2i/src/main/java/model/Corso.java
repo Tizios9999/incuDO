@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-public class Corsi {
+public class Corso {
 
 	private int id;
 	private String nome;
@@ -56,7 +56,7 @@ public class Corsi {
 	}
 	@Override
 	public String toString() {
-		return "Corsi [id=" + id + ", nome=" + nome + ", descrizione=" + descrizione + ", data=" + data + ", durata="
+		return "Corso [id=" + id + ", nome=" + nome + ", descrizione=" + descrizione + ", data=" + data + ", durata="
 				+ durata + ", luogo=" + luogo + ", disponibile=" + disponibile + "]";
 	}
 	

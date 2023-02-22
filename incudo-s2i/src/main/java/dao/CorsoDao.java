@@ -1,6 +1,6 @@
 package dao;
 
-public interface CorsiDao {
+public interface CorsoDao {
 	
 	public void caricaCorsi(String CSVpath);
 }

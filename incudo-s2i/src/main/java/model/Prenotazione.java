@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-public class Prenotazioni {
+public class Prenotazione {
 	
 	private Integer id;
 	private Integer idAttività;
@@ -52,7 +52,7 @@ public class Prenotazioni {
 
 	@Override
 	public String toString() {
-		return "Prenotazioni [id=" + id + ", idAttività=" + idAttività + ", idUtente=" + idUtente + ", dataInizio="
+		return "Prenotazione [id=" + id + ", idAttività=" + idAttività + ", idUtente=" + idUtente + ", dataInizio="
 				+ dataInizio + ", dataFine=" + dataFine + "]";
 	}
 	

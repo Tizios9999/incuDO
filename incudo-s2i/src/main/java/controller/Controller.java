@@ -33,7 +33,7 @@ public class Controller {
 		System.out.println("|0   	 | Uscire dal programma                               |");
 		System.out.println("+--------+----------------------------------------------------+");
 		
-		dao.caricaUtenti("prova");
+		dao.caricaUtenti("utenti.csv");
 		
 		do {
 		

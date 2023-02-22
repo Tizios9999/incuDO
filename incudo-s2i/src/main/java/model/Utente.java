@@ -97,5 +97,5 @@ public class Utente {
 		return "Utente [id=" + id + ", Nome=" + nome + ", Cognome=" + cognome + ", dataNascita=" + dataNascita
 				+ ", indirizzo=" + indirizzo + ", documentoId=" + documentoId + "]";
 	}
-	
+
 }

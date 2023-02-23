@@ -9,7 +9,7 @@ import util.EstrattoreDati;
 public class UtenteDaoImpl implements UtenteDao {
 
 	private String[] campiTabella = {"Id", "Nome", "Cognome", "Data di Nascita", "Indirizzo", "Documento ID"};
-	private List<Utente> listaUtenti = new ArrayList<>();
+	private List<Utente> listaUtenti = new ArrayList<Utente>();
 	
 	public void aggiungiUtente(Utente utente) {
 		// TODO Auto-generated method stub

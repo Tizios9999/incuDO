@@ -2,7 +2,7 @@ package controller;
 
 import java.util.Scanner;
 
-import dao.UtenteDaoImpl;
+import dao.CorsoDaoImpl;
 
 public class Controller {
 	
@@ -11,7 +11,7 @@ public class Controller {
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
 		
-		UtenteDaoImpl dao = new UtenteDaoImpl();
+		CorsoDaoImpl dao = new CorsoDaoImpl();
 		
 		String choice;
 		
@@ -33,7 +33,7 @@ public class Controller {
 		System.out.println("|0   	 | Uscire dal programma                               |");
 		System.out.println("+--------+----------------------------------------------------+");
 		
-		dao.caricaUtenti("utenti.csv");
+		dao.caricaCorsi("corsi.csv");
 		
 		do {
 		

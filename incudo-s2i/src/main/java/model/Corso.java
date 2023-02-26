@@ -32,7 +32,8 @@ public class Corso {
 			this.dataCorso = LocalDate.parse(data[3], formatter);
 			this.durata = Integer.parseInt(data[4]);
 			this.luogo = data[5];
-			this.disponibile = Boolean.parseBoolean(data[6]);
+			
+			this.disponibile = (data[6] == "SI") ? true : false;
 		}
 		
 		public Corso build() {

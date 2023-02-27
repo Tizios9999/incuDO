@@ -27,10 +27,7 @@ public class UtenteDaoImpl implements UtenteDao {
 		for (String[] riga : tabellaDati) {
 			Utente utente = new Utente.UtenteBuilder(riga).build();
 			listaUtenti.add(utente);
-        	System.out.println(utente);
 		}
-		
-		System.out.println(listaUtenti);
      		
 	}
 	

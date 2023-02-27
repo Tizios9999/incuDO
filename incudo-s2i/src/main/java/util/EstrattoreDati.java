@@ -16,8 +16,6 @@ public class EstrattoreDati {
 	public ArrayList<String[]> caricaDaCsv(String csvFile, String[] campiTabella) {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Caricamento");
-		
 		String csvPath = "src\\main\\resources\\" + csvFile;
         ArrayList<String[]> tabella = new ArrayList<String[]>();
         

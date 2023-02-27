@@ -12,7 +12,6 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 	private List<Prenotazione> listaPrenotazioni = new ArrayList<Prenotazione>();
 
 	public void caricaPrenotazioni(String csvFile) {
-		System.out.println("Carico Prenotazioni");
 
 		EstrattoreDati providerDati = new EstrattoreDati();
 
@@ -21,10 +20,7 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 		for (String[] riga : tabellaDati) {
 			Prenotazione prenotazione = new Prenotazione.PrenotazioneBuilder(riga).build();
 			listaPrenotazioni.add(prenotazione);
-			System.out.println(prenotazione);
 		}
-
-		System.out.println(listaPrenotazioni);
 
 	}
 
@@ -32,5 +28,15 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 		// TODO Auto-generated method stub
 		System.out.println(idCorso + " " + idUtente);
 	}
+
+	public List<Prenotazione> getListaPrenotazioni() {
+		return listaPrenotazioni;
+	}
+
+	public void setListaPrenotazioni(List<Prenotazione> listaPrenotazioni) {
+		this.listaPrenotazioni = listaPrenotazioni;
+	}
+	
+	
 
 }

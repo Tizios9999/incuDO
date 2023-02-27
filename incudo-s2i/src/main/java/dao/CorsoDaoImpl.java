@@ -15,8 +15,6 @@ public class CorsoDaoImpl {
 	
 	public void caricaCorsi(String csvFile) {
 		
-		System.out.println("Caricamento corsi");
-		
 		EstrattoreDati providerDati = new EstrattoreDati();
 		
 		ArrayList<String[]> tabellaDati = providerDati.caricaDaCsv(csvFile, campiTabella);
@@ -24,12 +22,18 @@ public class CorsoDaoImpl {
 		for (String[] riga : tabellaDati) {
 			Corso corso = new Corso.CorsoBuilder(riga).build();
 			listaCorsi.add(corso);
-//        	System.out.println(corso);
-//			System.out.println(Arrays.toString(riga));
 		}
 		
-		System.out.println(listaCorsi);
-		
 	}
+
+	public List<Corso> getListaCorsi() {
+		return listaCorsi;
+	}
+
+	public void setListaCorsi(List<Corso> listaCorsi) {
+		this.listaCorsi = listaCorsi;
+	}
+	
+	
 	
 }

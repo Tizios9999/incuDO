@@ -5,6 +5,7 @@ import java.util.Scanner;
 import dao.CorsoDaoImpl;
 import dao.PrenotazioneDaoImpl;
 import dao.UtenteDaoImpl;
+import view.CorsoView;
 
 public class Controller {
 	
@@ -16,6 +17,7 @@ public class Controller {
 		CorsoDaoImpl dao = new CorsoDaoImpl();
 		UtenteDaoImpl dao2 = new UtenteDaoImpl();
 		PrenotazioneDaoImpl dao3 = new PrenotazioneDaoImpl();
+		CorsoView corsoView = new CorsoView();
 		
 		String choice;
 		
@@ -40,6 +42,7 @@ public class Controller {
 		dao.caricaCorsi("corsi.csv");
 		dao2.caricaUtenti("utenti.csv");
 		dao3.caricaPrenotazioni("prenotazioni.csv");
+	
 		
 		do {
 		
@@ -49,7 +52,7 @@ public class Controller {
 		
 		switch (choice) {
 		case "1":
-			System.out.println("Visualizzerò i corsi");
+			corsoView.displayCorsi(dao.getListaCorsi());
 			break;
 		case "2":
 			System.out.println("Prenoterò un corso esistente");

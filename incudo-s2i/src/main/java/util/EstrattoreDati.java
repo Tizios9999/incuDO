@@ -2,7 +2,6 @@ package util;
 
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.opencsv.CSVParser;
@@ -20,14 +19,7 @@ public class EstrattoreDati {
 		System.out.println("Caricamento");
 		
 		String csvPath = "src\\main\\resources\\" + csvFile;
-        String line = "";
-        String csvDelimiter = ";";
-        String[] nextData, data;
-        Boolean lineIsSplit = false;
-        ArrayList<String> dataList = new ArrayList<String>();
         ArrayList<String[]> tabella = new ArrayList<String[]>();
-        int pos = 0;
-        String entireCSV = "";
         
         
         try {
@@ -36,7 +28,11 @@ public class EstrattoreDati {
       
             // create csvParser object with
             // custom separator semi-colon
-            CSVParser parser = new CSVParserBuilder().withSeparator(';').withQuoteChar('"').withIgnoreQuotations(false).build();
+            CSVParser parser = new CSVParserBuilder()
+            						.withSeparator(';')
+            						.withQuoteChar('"')
+            						.withIgnoreQuotations(false)
+            						.build();
       
             // create csvReader object with parameter
             // filereader and parser

@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Prenotazione {
 	
@@ -9,6 +10,40 @@ public class Prenotazione {
 	private Integer idUtente;
 	private LocalDate dataInizio;
 	private LocalDate dataFine;
+	
+	public static class PrenotazioneBuilder {
+		private Integer id;
+		private Integer idAttività;
+		private Integer idUtente;
+		private LocalDate dataInizio;
+		private LocalDate dataFine;
+		
+		public PrenotazioneBuilder(String[] data) {
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			
+			this.id = Integer.parseInt(data[0]);
+			this.idAttività = Integer.parseInt(data[1]);
+			this.idUtente = Integer.parseInt(data[2]);
+			this.dataInizio = LocalDate.parse(data[3], formatter);
+			this.dataFine = LocalDate.parse(data[4], formatter);
+			
+		}
+		
+		public Prenotazione build() {
+			return new Prenotazione(this);
+		}
+	}
+	
+	private Prenotazione(PrenotazioneBuilder builder) {
+		this.id = builder.id;
+		this.idAttività = builder.idAttività;
+		this.idUtente = builder.idUtente;
+		this.dataInizio = builder.dataInizio;
+		this.dataFine = builder.dataFine;
+	}
+	
+	
 	
 	public Integer getId() {
 		return id;

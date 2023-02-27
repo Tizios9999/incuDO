@@ -3,6 +3,8 @@ package controller;
 import java.util.Scanner;
 
 import dao.CorsoDaoImpl;
+import dao.PrenotazioneDaoImpl;
+import dao.UtenteDaoImpl;
 
 public class Controller {
 	
@@ -12,6 +14,8 @@ public class Controller {
 		Scanner scan = new Scanner(System.in);
 		
 		CorsoDaoImpl dao = new CorsoDaoImpl();
+		UtenteDaoImpl dao2 = new UtenteDaoImpl();
+		PrenotazioneDaoImpl dao3 = new PrenotazioneDaoImpl();
 		
 		String choice;
 		
@@ -34,6 +38,8 @@ public class Controller {
 		System.out.println("+--------+----------------------------------------------------+");
 		
 		dao.caricaCorsi("corsi.csv");
+		dao2.caricaUtenti("utenti.csv");
+		dao3.caricaPrenotazioni("prenotazioni.csv");
 		
 		do {
 		

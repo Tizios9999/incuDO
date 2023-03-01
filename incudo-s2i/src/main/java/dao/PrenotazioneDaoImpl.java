@@ -14,7 +14,7 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 	public void aggiungiPrenotazione(Prenotazione prenotazione) {
 		this.listaPrenotazioni.add(prenotazione);
 	}
-	
+
 	public void caricaPrenotazioni(String csvFile) {
 
 		EstrattoreDati providerDati = new EstrattoreDati();
@@ -27,26 +27,38 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 		}
 
 	}
-	
+
 	// Returns an Integer with the first id available to ensure unique id
-	
+
 	public Integer disponibilitàIdPrenotazione(Integer idCorso, Integer idUtente) {
-		
+
 		Integer slotDisponibile = -1;
-		
+
 		for (Prenotazione prenotazione : this.listaPrenotazioni) {
-			
+
 			if (idCorso == prenotazione.getIdAttività() || idUtente == prenotazione.getIdUtente()) {
 				return -1;
 			} else {
 				slotDisponibile = slotDisponibile < prenotazione.getId() ? prenotazione.getId() : slotDisponibile;
 			}
-			
+
 		}
-		
+
 		return slotDisponibile + 1;
 	}
-	
+
+	public Boolean cancellaPrenotazione(Integer idCorso, Integer idUtente) {
+
+		for (Prenotazione prenotazione : this.listaPrenotazioni) {
+
+			if (idCorso == prenotazione.getIdAttività() && idUtente == prenotazione.getIdUtente()) {
+				listaPrenotazioni.remove(prenotazione);
+				System.out.println(listaPrenotazioni);
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public void togglePrenotazione(Integer idCorso, Integer idUtente) {
 		// TODO Auto-generated method stub
@@ -60,7 +72,5 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 	public void setListaPrenotazioni(List<Prenotazione> listaPrenotazioni) {
 		this.listaPrenotazioni = listaPrenotazioni;
 	}
-	
-	
 
 }

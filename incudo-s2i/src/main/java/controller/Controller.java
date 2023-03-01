@@ -86,6 +86,20 @@ public class Controller {
 			break;
 		case "3":
 			System.out.println("Disdirò una prenotazione");
+			
+			try {
+				System.out.println("Inserisci ID corso");
+				Integer idCorso = scan.nextInt();
+				
+				System.out.println("Inserisci ID utente");
+				Integer idUtente = scan.nextInt();
+				
+				service.disdiciPrenotazione(idCorso, idUtente);
+				
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+			
 			break;
 		case "4":
 			System.out.println("Aggiungerò un nuovo utente");

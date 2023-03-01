@@ -77,28 +77,30 @@ public class Service {
 					System.out.println("Prenotazione non disponibile");
 				}
 				
-				// Se no:
-			
-				// Creo nuova prenotazione con i dati sopra
-			
-				// dao.corsoBuilder
-			
-				// Su corsi, cerco il corso con idCorso e da true lo imposto a false.
-			
-				// dao.modificaCorso
-				
 			}
-			
-			
 			
 		}
 	
-		public void rimuoviPrenotazione() {
+		public void disdiciPrenotazione(Integer idCorso, Integer idUtente) {
 			
-			// Controlla se prenotazione già esistente
+			Corso corso = this.corsoDaoImpl.cercaCorsoPerId(idCorso);
 			
-				// dao.cercaCorsoPerId
-				// dao.cercaUtentePerId
+			Utente utente = this.utenteDaoImpl.cercaUtentePerId(idUtente);
+			
+			System.out.println("Corso:" + corso);
+			System.out.println("Utente:" + utente);
+			
+			if (utente == null || corso == null) {
+				System.out.println("Corso o utente non trovato");
+			} else {
+				
+			if (this.prenotazioneDaoImpl.cancellaPrenotazione(idCorso, idUtente)) {
+				System.out.println("Prenotazione cancellata");
+			} else {
+				System.out.println("Prenotazione non trovata");
+			}
+				
+			}
 						
 				// Se sì:
 							

@@ -37,6 +37,19 @@ public class CorsoDaoImpl {
 		
 		return null;
 	}
+	
+	public void setDisponibilitàCorso(Integer id, Boolean disponibile) {
+		
+		for (Corso corso : this.listaCorsi) {
+			
+			if (id == corso.getId()) {
+				corso.setDisponibile(disponibile);
+				System.out.println(corso);
+				break;
+			}
+		}
+		
+	}
 
 	public List<Corso> getListaCorsi() {
 		return listaCorsi;

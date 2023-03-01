@@ -71,7 +71,7 @@ public class Service {
 					
 					System.out.println(nuovaPrenotazione);
 					
-					// Modifica corso
+					corsoDaoImpl.setDisponibilitàCorso(corso.getId(), false);
 					
 				} else {
 					System.out.println("Prenotazione non disponibile");

@@ -25,6 +25,18 @@ public class CorsoDaoImpl {
 		}
 		
 	}
+	
+	public Corso cercaCorsoPerId(Integer id) {
+		
+		for (Corso corso : this.listaCorsi) {
+			
+			if (id == corso.getId()) {
+				return corso;
+			}
+		}
+		
+		return null;
+	}
 
 	public List<Corso> getListaCorsi() {
 		return listaCorsi;

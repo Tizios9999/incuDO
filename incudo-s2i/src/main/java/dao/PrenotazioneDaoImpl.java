@@ -23,6 +23,20 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 		}
 
 	}
+	
+	public Boolean disponibilitàPrenotazione(Integer idCorso, Integer idUtente) {
+		
+		for (Prenotazione prenotazione : this.listaPrenotazioni) {
+			
+			if (idCorso == prenotazione.getIdAttività() || idUtente == prenotazione.getIdUtente()) {
+				return false;
+			}
+			
+		}
+		
+		return true;
+	}
+	
 
 	public void togglePrenotazione(Integer idCorso, Integer idUtente) {
 		// TODO Auto-generated method stub

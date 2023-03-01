@@ -5,11 +5,20 @@ import java.util.Scanner;
 import dao.CorsoDaoImpl;
 import dao.PrenotazioneDaoImpl;
 import dao.UtenteDaoImpl;
+import service.Service;
 import view.CorsoView;
 
 public class Controller {
 	
+	private Service service;
+	
+	public Controller() {
+	       this.service = Service.getInstance();
+	    }
+	 
 	public void start() {
+		
+		service.caricaDati();
 		
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
@@ -56,6 +65,24 @@ public class Controller {
 			break;
 		case "2":
 			System.out.println("Prenoterò un corso esistente");
+			
+			try {
+				System.out.println("Inserisci ID corso");
+				Integer idCorso = scan.nextInt();
+				
+				System.out.println("Inserisci ID utente");
+				Integer idUtente = scan.nextInt();
+				
+				service.aggiungiPrenotazione(idCorso, idUtente);
+				
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+			
 			break;
 		case "3":
 			System.out.println("Disdirò una prenotazione");

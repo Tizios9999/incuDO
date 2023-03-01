@@ -31,4 +31,15 @@ public class UtenteDaoImpl implements UtenteDao {
      		
 	}
 	
+	public Utente cercaUtentePerId(Integer id) {
+		
+		for (Utente utente : this.listaUtenti) {
+			if (id == utente.getId()) {
+				return utente;
+			}
+		}
+		
+		return null;
+	}
+	
 }

@@ -6,6 +6,7 @@ import dao.CorsoDaoImpl;
 import dao.PrenotazioneDaoImpl;
 import dao.UtenteDaoImpl;
 import model.Corso;
+import model.Prenotazione;
 import model.Utente;
 
 public class Service {
@@ -36,7 +37,7 @@ public class Service {
 			
 		}
 		
-		public void aggiungiPrenotazione(Integer idCorso, Integer idUtente) {
+		public void creaPrenotazione(Integer idCorso, Integer idUtente) {
 			
 			// Controlla se prenotazione già esistente
 			
@@ -53,16 +54,27 @@ public class Service {
 				
 				// Cerco se c'è una prenotazione disponibile
 				
-				if (this.prenotazioneDaoImpl.disponibilitàPrenotazione(idCorso, idUtente) == true) {
+				Integer nuovoId = this.prenotazioneDaoImpl.disponibilitàIdPrenotazione(idCorso, idUtente);
+				
+				if (nuovoId > 0) {
 					
 					LocalDate dataInizio = corso.getDataCorso();
 					LocalDate dataFine = dataInizio.plusDays(corso.getDurata()/24);
-					
 					
 					// creare prenotazione
 					
 					System.out.println("Nuova prenotazione corso: " + corso.getNome() + " iscritto " + utente.getNome() + " da " + dataInizio + " a " + dataFine);
 					
+					Prenotazione nuovaPrenotazione = new Prenotazione(nuovoId, corso.getId(), utente.getId(), dataInizio, dataFine);
+					
+					this.prenotazioneDaoImpl.aggiungiPrenotazione(nuovaPrenotazione);
+					
+					System.out.println(nuovaPrenotazione);
+					
+					// Modifica corso
+					
+				} else {
+					System.out.println("Prenotazione non disponibile");
 				}
 				
 				// Se no:

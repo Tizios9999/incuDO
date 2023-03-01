@@ -43,7 +43,13 @@ public class Prenotazione {
 		this.dataFine = builder.dataFine;
 	}
 	
-	
+	public Prenotazione(Integer id, Integer idAttività, Integer idUtente, LocalDate dataInizio, LocalDate dataFine) {
+		this.id = id;
+		this.idAttività = idAttività;
+		this.idUtente = idUtente;
+		this.dataInizio = dataInizio;
+		this.dataFine = dataFine;
+	}
 	
 	public Integer getId() {
 		return id;

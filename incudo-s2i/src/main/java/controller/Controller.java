@@ -73,7 +73,7 @@ public class Controller {
 				System.out.println("Inserisci ID utente");
 				Integer idUtente = scan.nextInt();
 				
-				service.aggiungiPrenotazione(idCorso, idUtente);
+				service.creaPrenotazione(idCorso, idUtente);
 				
 			} catch (NumberFormatException e) {
 				e.printStackTrace();

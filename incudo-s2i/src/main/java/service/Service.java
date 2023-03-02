@@ -102,15 +102,18 @@ public class Service {
 				
 			}
 						
-				// Se sì:
-							
-					// dao.deleteCorso (ritorna true se è stato fatto)
-						
-					// se dao.deleteCorso torna true: 
-						// Su corsi, cerco il corso con idCorso e da false lo imposto a true.
-												
-						// dao.modificaCorso
+		}
+		
+		public void aggiungiUtente(String nome, String cognome, String dataNascita, String indirizzoUtente, String documentoIdUtente) {
 			
-				// Se no: non c'è nessuna prenotazione con questi dati
+			String id = String.valueOf(this.utenteDaoImpl.trovaUltimoId() + 1);
+			
+			String[] arrayUtente = {id, nome, cognome, dataNascita, indirizzoUtente, documentoIdUtente};
+			
+			Utente utente = new Utente.UtenteBuilder(arrayUtente).build();
+			
+			this.utenteDaoImpl.inserisciUtente(utente);
+			
+			
 		}
 }

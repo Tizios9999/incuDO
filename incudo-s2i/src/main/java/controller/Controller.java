@@ -103,6 +103,24 @@ public class Controller {
 			break;
 		case "4":
 			System.out.println("Aggiungerò un nuovo utente");
+			
+			System.out.println("Inserisci Nome utente: ");
+			String nomeUtente = scan.nextLine();
+				
+			System.out.println("Inserisci Cognome utente: ");
+			String cognomeUtente = scan.nextLine();
+				
+			System.out.println("Inserisci la data di nascita (formato dd/mm/yyyy)");
+			String dataNascitaUtente = scan.nextLine();
+				
+			System.out.println("Inserisci indirizzo: ");
+			String indirizzoUtente = scan.nextLine();
+				
+			System.out.println("Inserisci l'ID del documento di identità: ");
+			String documentoIdUtente = scan.nextLine();
+				
+			service.aggiungiUtente(nomeUtente, cognomeUtente, dataNascitaUtente, indirizzoUtente, documentoIdUtente);
+			
 			break;
 		case "5":
 			System.out.println("Esporterò in un file i corsi ancora disponibili");

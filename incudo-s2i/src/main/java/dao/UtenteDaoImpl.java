@@ -11,10 +11,11 @@ public class UtenteDaoImpl implements UtenteDao {
 	private String[] campiTabella = {"Id", "Nome", "Cognome", "Data di Nascita", "Indirizzo", "Documento ID"};
 	private List<Utente> listaUtenti = new ArrayList<Utente>();
 	
-	public void aggiungiUtente(Utente utente) {
+	public void inserisciUtente(Utente utente) {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Aggiunto utente:" + utente.toString());
+		this.listaUtenti.add(utente);
+		
 	}
 
 	public void caricaUtenti(String csvFile) {
@@ -42,4 +43,14 @@ public class UtenteDaoImpl implements UtenteDao {
 		return null;
 	}
 	
+	public Integer trovaUltimoId() {
+		
+		Integer nuovoId = -1;
+		
+		for (Utente utente : this.listaUtenti) {
+			nuovoId = utente.getId() > nuovoId ? utente.getId() : nuovoId;
+		}
+		
+		return nuovoId;
+	}
 }

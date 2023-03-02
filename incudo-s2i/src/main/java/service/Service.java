@@ -116,4 +116,10 @@ public class Service {
 			
 			
 		}
+		
+		public void esportaCsvCorsi() {
+			
+			this.corsoDaoImpl.esportaCsv();
+			
+		}
 }

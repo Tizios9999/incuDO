@@ -50,6 +50,33 @@ public class CorsoDaoImpl {
 		}
 		
 	}
+	
+	public void esportaCsv() {
+		
+		ArrayList<String[]> listaDaEsportare = new ArrayList<String[]>();
+		
+		String[] headers = {"Id", "Nome", "Descrizione", "Data", "Durata", "Luogo"};
+		
+		for (Corso corso : this.listaCorsi) {
+			
+			if (corso.isDisponibile()) {
+				
+				String[] valori = new String[headers.length];
+				valori[0] = String.valueOf(corso.getId());
+				valori[1] = corso.getNome();
+				valori[2] = corso.getDescrizione();
+				valori[3] = String.valueOf(corso.getDataCorso());
+				valori[4] = String.valueOf(corso.getDurata());
+				valori[5] = corso.getLuogo();
+				listaDaEsportare.add(valori);
+			
+			}
+		 
+		}
+		
+		EstrattoreDati providerDati = new EstrattoreDati();
+		providerDati.scriviCsv(headers, listaDaEsportare);
+	}
 
 	public List<Corso> getListaCorsi() {
 		return listaCorsi;

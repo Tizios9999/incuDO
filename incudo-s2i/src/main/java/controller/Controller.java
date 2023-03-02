@@ -124,6 +124,9 @@ public class Controller {
 			break;
 		case "5":
 			System.out.println("Esporterò in un file i corsi ancora disponibili");
+			
+			service.esportaCsvCorsi();
+			
 			break;
 		case "0":
 			System.out.println("Esco.");

@@ -1,10 +1,10 @@
 package controller;
 
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import dao.CorsoDaoImpl;
-import dao.PrenotazioneDaoImpl;
-import dao.UtenteDaoImpl;
 import service.Service;
 import view.CorsoView;
 
@@ -15,7 +15,15 @@ public class Controller {
 	public Controller() {
 	       this.service = Service.getInstance();
 	    }
-	 
+	
+	public void attendiConferma() {
+		System.out.println();
+		System.out.println("Premi invio per continuare.");
+		Scanner scan = new Scanner(System.in);
+	    scan.nextLine();
+		System.out.println();
+	}
+	
 	public void start() {
 		
 		service.caricaDati();
@@ -24,11 +32,11 @@ public class Controller {
 		Scanner scan = new Scanner(System.in);
 		
 		CorsoDaoImpl dao = new CorsoDaoImpl();
-		UtenteDaoImpl dao2 = new UtenteDaoImpl();
-		PrenotazioneDaoImpl dao3 = new PrenotazioneDaoImpl();
 		CorsoView corsoView = new CorsoView();
 		
-		String choice;
+		Integer choice = -1;
+		
+		do {
 		
 		System.out.println("Opzioni disponibili:");
 		System.out.println();
@@ -48,22 +56,33 @@ public class Controller {
 		System.out.println("|0   	 | Uscire dal programma                               |");
 		System.out.println("+--------+----------------------------------------------------+");
 		
-		dao.caricaCorsi("corsi.csv");
-		dao2.caricaUtenti("utenti.csv");
-		dao3.caricaPrenotazioni("prenotazioni.csv");
-	
-		
-		do {
-		
 		System.out.println();
-		System.out.print("Seleziona una opzione e premi invio: ");
-		choice = scan.nextLine();
+		
+		while(true) {
+		
+			try {
+				
+				System.out.print("Seleziona una opzione e premi invio: ");
+				choice = scan.nextInt();
+				break;
+			
+			} catch(InputMismatchException e) {
+				
+				System.out.println("Prego inserire un numero da 0 in su.");
+				scan.nextLine();
+				System.out.println();
+			} 
+			
+		}
+		
+		scan.nextLine(); // This is to clean the scanner buffer.
 		
 		switch (choice) {
-		case "1":
-			corsoView.displayCorsi(dao.getListaCorsi());
+		case 1:
+			corsoView.displayCorsi(service.getListaCorsi());
+			attendiConferma();
 			break;
-		case "2":
+		case 2:
 			System.out.println("Prenoterò un corso esistente");
 			
 			try {
@@ -78,13 +97,10 @@ public class Controller {
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}
-			
-			
-			
-			
+			attendiConferma();
 			
 			break;
-		case "3":
+		case 3:
 			System.out.println("Disdirò una prenotazione");
 			
 			try {
@@ -99,10 +115,11 @@ public class Controller {
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}
-			
+			attendiConferma();
 			break;
-		case "4":
+		case 4:
 			System.out.println("Aggiungerò un nuovo utente");
+			scan.nextLine();
 			
 			System.out.println("Inserisci Nome utente: ");
 			String nomeUtente = scan.nextLine();
@@ -121,25 +138,25 @@ public class Controller {
 				
 			service.aggiungiUtente(nomeUtente, cognomeUtente, dataNascitaUtente, indirizzoUtente, documentoIdUtente);
 			
+			attendiConferma();
 			break;
-		case "5":
-			System.out.println("Esporterò in un file i corsi ancora disponibili");
+		case 5:
+			
+			// Export all available courses to CSV File
 			
 			service.esportaCsvCorsi();
 			
+			attendiConferma();
 			break;
-		case "0":
-			System.out.println("Esco.");
+		case 0:
+			System.out.println("Arrivederci!");
 			break;
 		default:
 			System.out.println("Opzione non disponibile");
 		}
 		
-		System.out.println("Hai scelto: " + choice);
+		} while (choice != 0);
 		
-		} while (!choice.equals("0"));
-		
-		System.out.println("Ciao ciao!");
 		}
 	}
 	

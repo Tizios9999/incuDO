@@ -1,6 +1,7 @@
 package service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import dao.CorsoDaoImpl;
 import dao.PrenotazioneDaoImpl;
@@ -121,5 +122,10 @@ public class Service {
 			
 			this.corsoDaoImpl.esportaCsv();
 			
+		}
+		
+		public List<Corso> getListaCorsi() {
+			
+			return this.corsoDaoImpl.getListaCorsi();
 		}
 }

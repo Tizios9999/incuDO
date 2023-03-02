@@ -12,7 +12,6 @@ import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import com.opencsv.CSVWriter;
 import com.opencsv.CSVWriterBuilder;
 import com.opencsv.ICSVWriter;
 
@@ -28,28 +27,23 @@ public class EstrattoreDati {
         
         
         try {
-            // Create an object of file reader class with CSV file as a parameter.
+
             FileReader filereader = new FileReader(csvPath);
       
-            // create csvParser object with
-            // custom separator semi-colon
             CSVParser parser = new CSVParserBuilder()
             						.withSeparator(';')
             						.withQuoteChar('"')
             						.withIgnoreQuotations(false)
             						.build();
       
-            // create csvReader object with parameter
-            // filereader and parser
             CSVReader csvReader = new CSVReaderBuilder(filereader)
                                       .withCSVParser(parser)
                                       .withSkipLines(1)
                                       .build();
       
-            // Read all data at once
+
             List<String[]> allData = csvReader.readAll();
       
-            // Print Data.
             for (String[] row : allData) {
 
             	if (row[0] == "") continue; 
@@ -100,8 +94,7 @@ public class EstrattoreDati {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		System.out.println("Scritto file in data " + lt);
+
 	}
 	
 }

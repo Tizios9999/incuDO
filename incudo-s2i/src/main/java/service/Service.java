@@ -40,6 +40,15 @@ public class Service {
 		prenotazioneDaoImpl.caricaPrenotazioni("prenotazioni.csv");
 
 	}
+	
+	public static String ConvertDateIntoString(LocalDate date) {
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+		String formattedDate = date.format(formatter);
+
+		return formattedDate;
+	}
 
 	public void creaPrenotazione(Integer idCorso, Integer idUtente) {
 
@@ -129,14 +138,6 @@ public class Service {
 		return this.corsoDaoImpl.getListaCorsi();
 	}
 
-	public static String ConvertDateIntoString(LocalDate date) {
-
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-		String formattedDate = date.format(formatter);
-
-		return formattedDate;
-	}
 
 	public List<String[]> getStringPrenotazioni() {
 

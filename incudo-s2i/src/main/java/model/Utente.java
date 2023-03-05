@@ -1,7 +1,6 @@
 package model;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Utente {
 	
@@ -22,12 +21,10 @@ public class Utente {
 		
 		public UtenteBuilder(String[] data) {
 			
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			
 			this.id = Integer.parseInt(data[0]);
 			this.nome = data[1];
 			this.cognome = data[2];
-			this.dataNascita = LocalDate.parse(data[3], formatter);
+			this.dataNascita = ModelUtilities.StringToDate(data[3]);
 			this.indirizzo = data[4];
 			this.documentoId = data[5];
 		}

@@ -26,20 +26,14 @@ public class Corso {
 		
 		public CorsoBuilder(String[] data) {
 			
-			Map<String, Boolean> itaToBoolMap = new HashMap<>();
-			itaToBoolMap.put("SI", true);
-			itaToBoolMap.put("NO", false);
-			
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			
 			this.id = Integer.parseInt(data[0]);
 			this.nome = data[1];
 			this.descrizione = data[2];
-			this.dataCorso = LocalDate.parse(data[3], formatter);
+			this.dataCorso = ModelUtilities.StringToDate(data[3]);
 			this.durata = Integer.parseInt(data[4]);
 			this.luogo = data[5];
 			
-			this.disponibile = itaToBoolMap.get(data[6]);
+			this.disponibile = ModelUtilities.itaToBoolMap.get(data[6]);
 		}
 		
 		public Corso build() {

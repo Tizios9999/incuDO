@@ -20,13 +20,11 @@ public class Prenotazione {
 		
 		public PrenotazioneBuilder(String[] data) {
 			
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			
 			this.id = Integer.parseInt(data[0]);
 			this.idAttività = Integer.parseInt(data[1]);
 			this.idUtente = Integer.parseInt(data[2]);
-			this.dataInizio = LocalDate.parse(data[3], formatter);
-			this.dataFine = LocalDate.parse(data[4], formatter);
+			this.dataInizio = ModelUtilities.StringToDate(data[3]);
+			this.dataFine = ModelUtilities.StringToDate(data[4]);
 			
 		}
 		

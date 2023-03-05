@@ -6,6 +6,7 @@ import java.util.Scanner;
 import dao.CorsoDaoImpl;
 import service.Service;
 import view.CorsoView;
+import view.PrenotazioneView;
 
 public class Controller {
 	
@@ -100,14 +101,26 @@ public class Controller {
 			
 			break;
 		case 3:
-			System.out.println("Disdirò una prenotazione");
+			System.out.println("Disdetta prenotazione");
+			System.out.println();
+			
+			PrenotazioneView pview = new PrenotazioneView();
+			
+			System.out.println("Questa è la lista di prenotazioni attive: ");
+			System.out.println();
+			
+			pview.displayPrenotazioniUtentiCorsiAttivi(service.getStringPrenotazioniUtentiCorsi());
 			
 			try {
-				System.out.println("Inserisci ID corso");
+				System.out.print("Inserisci ID corso: ");
 				Integer idCorso = scan.nextInt();
 				
-				System.out.println("Inserisci ID utente");
+				System.out.println();
+				
+				System.out.print("Inserisci ID utente: ");
 				Integer idUtente = scan.nextInt();
+				
+				System.out.println();
 				
 				service.disdiciPrenotazione(idCorso, idUtente);
 				

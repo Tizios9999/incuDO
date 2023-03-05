@@ -79,6 +79,7 @@ public class CorsoDaoImpl {
 	}
 
 	public List<Corso> getListaCorsi() {
+		
 		return listaCorsi;
 	}
 

@@ -53,4 +53,9 @@ public class UtenteDaoImpl implements UtenteDao {
 		
 		return nuovoId;
 	}
+	
+	public List<Utente> getListaUtenti() {
+		
+		return listaUtenti;
+	}
 }

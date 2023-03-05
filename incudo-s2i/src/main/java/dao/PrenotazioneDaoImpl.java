@@ -53,7 +53,7 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 
 			if (idCorso == prenotazione.getIdAttività() && idUtente == prenotazione.getIdUtente()) {
 				listaPrenotazioni.remove(prenotazione);
-				System.out.println(listaPrenotazioni);
+
 				return true;
 			}
 		}
@@ -66,6 +66,7 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 	}
 
 	public List<Prenotazione> getListaPrenotazioni() {
+		
 		return listaPrenotazioni;
 	}
 

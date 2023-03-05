@@ -161,8 +161,6 @@ public class Service {
 	public List<String[]> getStringPrenotazioniUtentiCorsi() {
 
 		List<Prenotazione> listaPrenotazioni = prenotazioneDaoImpl.getListaPrenotazioni();
-		List<Corso> listaCorsi = this.corsoDaoImpl.getListaCorsi();
-		List<Utente> listaUtenti = this.utenteDaoImpl.getListaUtenti();
 		
 		List<String[]> listaPrenotazioniUtentiCorsiStr = new ArrayList<String[]>();
 

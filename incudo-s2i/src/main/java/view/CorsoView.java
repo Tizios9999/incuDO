@@ -1,29 +1,35 @@
 package view;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import model.Corso;
 
 public class CorsoView {
 	
-	public void displayCorsi(List<Corso> listaCorsi) {
+	public void displayCorsi(List<String[]> listaCorsi) {
 		
-		Map<Boolean, String> boolToItaMap = new HashMap<>();
-		boolToItaMap.put(true, "SI");
-		boolToItaMap.put(false, "NO");
-		
-		for (Corso corso : listaCorsi) {
-			System.out.println("ID: " + corso.getId());
-			System.out.println("Nome: " + corso.getNome());
-			System.out.println("Descrizione: " + corso.getDescrizione());
-			System.out.println("Data Corso: " + corso.getDataCorso());
-			System.out.println("Luogo: " + corso.getLuogo());
-			System.out.println("Disponibile: " + boolToItaMap.get(corso.isDisponibile()));
-			System.out.println("-------------------------------------------------------");
+		for (String[] corso : listaCorsi) {
+			System.out.println();
+			ViewUtils.printBarra(128);
+			System.out.println();
+			System.out.println("ID: " + corso[0]);
+			System.out.println("Nome corso: " + corso[1]);
+			System.out.println();
+			System.out.println("Descrizione: ");
+			System.out.println();
+			System.out.println(ViewUtils.formattaPerBox(corso[2], 128));
+			System.out.println();
+			System.out.println("Inizia in data " + corso[3] + " a " + corso[4]);
+			System.out.println("Disponibile: " + corso[5]);
 		}
 		
 	}
 	
+	public void displayCorsiLiberi(List<String[]> listaCorsiLiberi) {
+		
+		System.out.println("Corsi disponibili:");
+		
+		for (String[] corso : listaCorsiLiberi) {
+			System.out.println("ID: " + corso[0] + " / " + "Nome: " + corso[1]);
+		} 
+		
+	}
 }

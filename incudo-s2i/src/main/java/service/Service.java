@@ -3,7 +3,9 @@ package service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dao.CorsoDaoImpl;
 import dao.PrenotazioneDaoImpl;
@@ -17,7 +19,13 @@ public class Service {
 	private CorsoDaoImpl corsoDaoImpl;
 	private UtenteDaoImpl utenteDaoImpl;
 	private PrenotazioneDaoImpl prenotazioneDaoImpl;
-
+	private static Map<Boolean, String> boolToItaMap = new HashMap<>();
+	
+	static {
+		boolToItaMap.put(true, "SI");
+		boolToItaMap.put(false, "NO");
+	}
+	
 	private static Service service;
 
 	private Service() {
@@ -41,7 +49,7 @@ public class Service {
 
 	}
 	
-	public static String ConvertDateIntoString(LocalDate date) {
+	public static String convertDateIntoString(LocalDate date) {
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -57,9 +65,6 @@ public class Service {
 		Corso corso = this.corsoDaoImpl.cercaCorsoPerId(idCorso);
 
 		Utente utente = this.utenteDaoImpl.cercaUtentePerId(idUtente);
-
-		System.out.println("Corso:" + corso);
-		System.out.println("Utente:" + utente);
 
 		if (utente == null || corso == null) {
 			System.out.println("Corso o utente non trovato");
@@ -83,7 +88,6 @@ public class Service {
 						dataFine);
 
 				this.prenotazioneDaoImpl.aggiungiPrenotazione(nuovaPrenotazione);
-				System.out.println(nuovaPrenotazione);
 				
 				corsoDaoImpl.setDisponibilitàCorso(corso.getId(), false);
 
@@ -149,8 +153,8 @@ public class Service {
 			String id = prenotazione.getId().toString();
 			String idCorso = prenotazione.getIdAttività().toString();
 			String idUtente = prenotazione.getIdUtente().toString();
-			String dataInizio = ConvertDateIntoString(prenotazione.getDataInizio());
-			String dataFine = ConvertDateIntoString(prenotazione.getDataFine());
+			String dataInizio = convertDateIntoString(prenotazione.getDataInizio());
+			String dataFine = convertDateIntoString(prenotazione.getDataFine());
 
 			String[] prenotazioneStr = { id, idCorso, idUtente, dataInizio, dataFine };
 			listaPrenotazioniStr.add(prenotazioneStr);
@@ -175,13 +179,83 @@ public class Service {
 			String nomeCorso = corso.getNome();
 			String idUtente = prenotazione.getIdUtente().toString();
 			String nominativoUtente = utente.getNome() + " " + utente.getCognome();
-			String dataInizio = ConvertDateIntoString(prenotazione.getDataInizio());
-			String dataFine = ConvertDateIntoString(prenotazione.getDataFine());
+			String dataInizio = convertDateIntoString(prenotazione.getDataInizio());
+			String dataFine = convertDateIntoString(prenotazione.getDataFine());
 
 			String[] prenotazioneStr = { id, idCorso, nomeCorso, idUtente, nominativoUtente, dataInizio, dataFine };
 			listaPrenotazioniUtentiCorsiStr.add(prenotazioneStr);
 		}
 
 		return listaPrenotazioniUtentiCorsiStr;
+	}
+	
+	
+	public List<String[]> getStringCorsi() {
+		
+		List<Corso> listaCorsi = corsoDaoImpl.getListaCorsi();
+		
+		List<String[]> listaCorsiStr = new ArrayList<String[]>();
+		
+		for (Corso corso : listaCorsi) {
+			
+			String id = String.valueOf(corso.getId());
+			String nomeCorso = corso.getNome();
+			String descrizioneCorso = corso.getDescrizione();
+			String dataCorso = convertDateIntoString(corso.getDataCorso());
+			String luogo = corso.getLuogo();
+			String disponibile = boolToItaMap.get(corso.isDisponibile());
+			
+			String[] corsoStr = { id, nomeCorso, descrizioneCorso, dataCorso, luogo, disponibile };
+			
+			listaCorsiStr.add(corsoStr);
+		}
+		
+		return listaCorsiStr;
+	}
+	
+	public List<String[]> getStringCorsiLiberi() {
+
+		List<String[]> listaCorsiLiberi = new ArrayList<String[]>();
+
+		List<Corso> listaCorsi = corsoDaoImpl.getListaCorsi();
+		
+		for (Corso corso : listaCorsi) {
+			
+			if (corso.isDisponibile()) {
+				String idCorso = String.valueOf(corso.getId());
+				String nomeCorso = corso.getNome();
+				String[] corsoStr = { idCorso, nomeCorso };
+				listaCorsiLiberi.add(corsoStr);
+			}
+
+		}
+
+		return listaCorsiLiberi;
+	}
+	
+	public List<String[]> getStringUtentiLiberi() {
+
+		List<String[]> listaUtentiLiberi = new ArrayList<String[]>();
+
+		List<Utente> listaUtenti = utenteDaoImpl.getListaUtenti();
+		
+		List<Integer> idUtentiPrenotati = new ArrayList<Integer>();
+		
+		for (Prenotazione prenotazione : prenotazioneDaoImpl.getListaPrenotazioni()) {
+			idUtentiPrenotati.add(prenotazione.getIdUtente());
+		}
+		
+		for (Utente utente : listaUtenti) {
+			
+			if (!idUtentiPrenotati.contains(utente.getId())) {
+				String idUtente = String.valueOf(utente.getId());
+				String nomeUtente = utente.getNome() + " " + utente.getCognome();
+				String[] utenteStr = { idUtente, nomeUtente };
+				listaUtentiLiberi.add(utenteStr);
+			}
+
+		}
+
+		return listaUtentiLiberi;
 	}
 }

@@ -1,5 +1,8 @@
 package controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -7,6 +10,7 @@ import dao.CorsoDaoImpl;
 import service.Service;
 import view.CorsoView;
 import view.PrenotazioneView;
+import view.UtenteView;
 
 public class Controller {
 	
@@ -16,23 +20,87 @@ public class Controller {
 	       this.service = Service.getInstance();
 	    }
 	
-	public void attendiConferma() {
+	public void attendiConferma(Scanner scan) {
 		System.out.println();
 		System.out.println("Premi invio per continuare.");
-		Scanner scan = new Scanner(System.in);
 	    scan.nextLine();
 		System.out.println();
+	}
+	
+	public Integer controllaNumero(String messaggio, Scanner scan) {
+		
+		Integer n;
+		
+		while(true) {
+			
+			try {
+				
+				System.out.println(messaggio);
+				n = scan.nextInt();
+				break;
+			
+			} catch(InputMismatchException e) {
+				
+				System.out.println("Prego inserire un numero.");
+				scan.nextLine();
+				System.out.println();
+			} 
+			
+		}
+		
+		scan.nextLine(); // This is to clean the scanner buffer.
+		
+		return n;
+	}
+	
+	public String controllaData(String messaggio, Scanner scan) {
+		
+		String dataInStringa;
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		
+		while(true) {
+			
+			try {
+				
+				System.out.println(messaggio);
+				
+				dataInStringa = scan.nextLine();
+				
+				// If the following date is not parsed correctly, I will catch the error
+				LocalDate dataControllo = LocalDate.parse(dataInStringa, formatter); 
+				
+				break;
+			
+			} catch(DateTimeParseException e) {
+				
+				System.out.println("Il formato della data non è corretto.");
+				System.out.println();
+			} 
+			
+		}
+		
+		return dataInStringa;
+	}
+	
+	public String inserisciCampo(String messaggio, Scanner scan) {
+		
+		String campo;
+		
+		System.out.println(messaggio);
+		campo = scan.nextLine();
+		
+		return campo;
 	}
 	
 	public void start() {
 		
 		service.caricaDati();
+		CorsoView cView = new CorsoView();
+		UtenteView uView = new UtenteView();
 		
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
-		
-		CorsoDaoImpl dao = new CorsoDaoImpl();
-		CorsoView corsoView = new CorsoView();
 		
 		Integer choice = -1;
 		
@@ -58,46 +126,27 @@ public class Controller {
 		
 		System.out.println();
 		
-		while(true) {
-		
-			try {
-				
-				System.out.print("Seleziona una opzione e premi invio: ");
-				choice = scan.nextInt();
-				break;
-			
-			} catch(InputMismatchException e) {
-				
-				System.out.println("Prego inserire un numero da 0 in su.");
-				scan.nextLine();
-				System.out.println();
-			} 
-			
-		}
-		
-		scan.nextLine(); // This is to clean the scanner buffer.
+		choice = controllaNumero("Seleziona una opzione e premi invio: ", scan);
 		
 		switch (choice) {
 		case 1:
-			corsoView.displayCorsi(service.getListaCorsi());
-			attendiConferma();
+			cView.displayCorsi(service.getStringCorsi());
+			attendiConferma(scan);
 			break;
 		case 2:
-			System.out.println("Prenoterò un corso esistente");
+			System.out.println("Prenotazione corsi esistenti");
 			
-			try {
-				System.out.println("Inserisci ID corso");
-				Integer idCorso = scan.nextInt();
+			cView.displayCorsiLiberi(service.getStringCorsiLiberi());
+			System.out.println();
+			uView.displayUtentiLiberi(service.getStringUtentiLiberi());
+			System.out.println();
 				
-				System.out.println("Inserisci ID utente");
-				Integer idUtente = scan.nextInt();
-				
-				service.creaPrenotazione(idCorso, idUtente);
-				
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
-			attendiConferma();
+			Integer idCorsoDaInserire = controllaNumero("Inserisci ID corso", scan);
+			Integer idUtenteDaInserire = controllaNumero("Inserisci ID utente", scan);
+					
+			service.creaPrenotazione(idCorsoDaInserire, idUtenteDaInserire);			
+			
+			attendiConferma(scan);
 			
 			break;
 		case 3:
@@ -111,46 +160,31 @@ public class Controller {
 			
 			pview.displayPrenotazioniUtentiCorsiAttivi(service.getStringPrenotazioniUtentiCorsi());
 			
-			try {
-				System.out.print("Inserisci ID corso: ");
-				Integer idCorso = scan.nextInt();
+			Integer idCorsoDaCancellare = controllaNumero("Inserisci ID corso", scan);
+			System.out.println();
+			Integer idUtenteDaCancellare = controllaNumero("Inserisci ID utente", scan);
+			System.out.println();
 				
-				System.out.println();
-				
-				System.out.print("Inserisci ID utente: ");
-				Integer idUtente = scan.nextInt();
-				
-				System.out.println();
-				
-				service.disdiciPrenotazione(idCorso, idUtente);
-				
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
-			attendiConferma();
+			service.disdiciPrenotazione(idCorsoDaCancellare, idUtenteDaCancellare);
+		
+			attendiConferma(scan);
 			break;
 		case 4:
-			System.out.println("Aggiungerò un nuovo utente");
-			scan.nextLine();
+			System.out.println("Inserimento nuovo utente");
+			System.out.println();
 			
-			System.out.println("Inserisci Nome utente: ");
-			String nomeUtente = scan.nextLine();
-				
-			System.out.println("Inserisci Cognome utente: ");
-			String cognomeUtente = scan.nextLine();
-				
-			System.out.println("Inserisci la data di nascita (formato dd/mm/yyyy)");
-			String dataNascitaUtente = scan.nextLine();
-				
-			System.out.println("Inserisci indirizzo: ");
-			String indirizzoUtente = scan.nextLine();
-				
-			System.out.println("Inserisci l'ID del documento di identità: ");
-			String documentoIdUtente = scan.nextLine();
-				
+			String nomeUtente = inserisciCampo("Inserisci Nome utente: ", scan);
+			String cognomeUtente = inserisciCampo("Inserisci Cognome utente: ", scan);
+			String dataNascitaUtente = controllaData("Inserisci la data di nascita (formato dd/mm/yyyy)", scan);
+			String indirizzoUtente = inserisciCampo("Inserisci indirizzo: ", scan);	
+			String documentoIdUtente = inserisciCampo("Inserisci l'ID del documento di identità: ", scan);
+			
 			service.aggiungiUtente(nomeUtente, cognomeUtente, dataNascitaUtente, indirizzoUtente, documentoIdUtente);
 			
-			attendiConferma();
+			System.out.println("Utente inserito: ");
+			uView.previewUtente(nomeUtente, cognomeUtente, dataNascitaUtente, indirizzoUtente, documentoIdUtente);
+			
+			attendiConferma(scan);
 			break;
 		case 5:
 			
@@ -158,13 +192,15 @@ public class Controller {
 			
 			service.esportaCsvCorsi();
 			
-			attendiConferma();
+			attendiConferma(scan);
 			break;
 		case 0:
 			System.out.println("Arrivederci!");
 			break;
 		default:
+			System.out.println();
 			System.out.println("Opzione non disponibile");
+			System.out.println();
 		}
 		
 		} while (choice != 0);

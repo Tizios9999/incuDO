@@ -44,7 +44,6 @@ public class CorsoDaoImpl {
 			
 			if (id == corso.getId()) {
 				corso.setDisponibile(disponibile);
-				System.out.println(corso);
 				break;
 			}
 		}

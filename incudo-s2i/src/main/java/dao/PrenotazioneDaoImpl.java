@@ -60,10 +60,6 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 		return false;
 	}
 
-	public void togglePrenotazione(Integer idCorso, Integer idUtente) {
-		// TODO Auto-generated method stub
-		System.out.println(idCorso + " " + idUtente);
-	}
 
 	public List<Prenotazione> getListaPrenotazioni() {
 		

@@ -17,13 +17,13 @@ import com.opencsv.ICSVWriter;
 
 
 
-public class EstrattoreDati {
+public class CsvDataManager {
 	
-	public ArrayList<String[]> caricaDaCsv(String csvFile, String[] campiTabella) {
+	public ArrayList<String[]> loadFromCsv(String csvFile, String[] fieldsTable) {
 		// TODO Auto-generated method stub
 		
 		String csvPath = "src\\main\\resources\\" + csvFile;
-        ArrayList<String[]> tabella = new ArrayList<String[]>();
+        ArrayList<String[]> table = new ArrayList<String[]>();
         
         
         try {
@@ -48,13 +48,13 @@ public class EstrattoreDati {
 
             	if (row[0] == "") continue; 
    
-                String[] fieldsArr = new String[campiTabella.length];
+                String[] fieldsArr = new String[fieldsTable.length];
                 
-                for (int i = 0; i < campiTabella.length; i++) {
+                for (int i = 0; i < fieldsTable.length; i++) {
                 	fieldsArr[i] = row[i];
                 }
                 
-                tabella.add(fieldsArr);
+                table.add(fieldsArr);
             }
            
         }
@@ -62,16 +62,16 @@ public class EstrattoreDati {
             e.printStackTrace();
         }
         
-        return tabella;
+        return table;
 	}
 	
-	public void scriviCsv(String[] headers, ArrayList<String[]> dati) {
+	public void writeCsv(String[] headers, ArrayList<String[]> data) {
 		
 		LocalDate lt = LocalDate.now();
 		DateTimeFormatter formatterFilename = DateTimeFormatter.ofPattern("dd_MM_yyyy");
-		String dataFormatoFile = lt.format(formatterFilename);
+		String dateFileFormat = lt.format(formatterFilename);
 		
-		String filePath = "prenotazioni_disponibili_" + dataFormatoFile + ".csv";
+		String filePath = "prenotazioni_disponibili_" + dateFileFormat + ".csv";
         
 		try {
 			ICSVWriter csvWriter = new CSVWriterBuilder(new FileWriter(filePath))
@@ -84,8 +84,8 @@ public class EstrattoreDati {
 
         // write rows
         
-        for (String[] riga : dati) {
-        	csvWriter.writeNext(riga);
+        for (String[] row : data) {
+        	csvWriter.writeNext(row);
         }
 
         csvWriter.close();

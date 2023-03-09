@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Utente;
-import util.EstrattoreDati;
+import util.CsvDataManager;
 
 public class UtenteDaoImpl implements UtenteDao {
 
@@ -21,9 +21,9 @@ public class UtenteDaoImpl implements UtenteDao {
 	public void loadUtenteTable(String csvFile) {
 		// TODO Auto-generated method stub
 		
-		EstrattoreDati providerDati = new EstrattoreDati();
+		CsvDataManager providerDati = new CsvDataManager();
 		
-		ArrayList<String[]> tabellaDati = providerDati.caricaDaCsv(csvFile, campiTabella);
+		ArrayList<String[]> tabellaDati = providerDati.loadFromCsv(csvFile, campiTabella);
 		
 		for (String[] riga : tabellaDati) {
 			Utente utente = new Utente.UtenteBuilder(riga).build();

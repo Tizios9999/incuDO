@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import model.Corso;
-import util.EstrattoreDati;
+import util.CsvDataManager;
 
 public class CorsoDaoImpl implements CorsoDao {
 	
@@ -15,9 +15,9 @@ public class CorsoDaoImpl implements CorsoDao {
 	
 	public void loadCorsoTable(String csvFile) {
 		
-		EstrattoreDati providerDati = new EstrattoreDati();
+		CsvDataManager providerDati = new CsvDataManager();
 		
-		ArrayList<String[]> tabellaDati = providerDati.caricaDaCsv(csvFile, campiTabella);
+		ArrayList<String[]> tabellaDati = providerDati.loadFromCsv(csvFile, campiTabella);
 		
 		for (String[] riga : tabellaDati) {
 			Corso corso = new Corso.CorsoBuilder(riga).build();
@@ -73,8 +73,8 @@ public class CorsoDaoImpl implements CorsoDao {
 		 
 		}
 		
-		EstrattoreDati providerDati = new EstrattoreDati();
-		providerDati.scriviCsv(headers, listaDaEsportare);
+		CsvDataManager providerDati = new CsvDataManager();
+		providerDati.writeCsv(headers, listaDaEsportare);
 	}
 
 	public List<Corso> getListaCorsi() {

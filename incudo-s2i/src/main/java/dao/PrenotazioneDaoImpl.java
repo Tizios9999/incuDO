@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Prenotazione;
-import util.EstrattoreDati;
+import util.CsvDataManager;
 
 public class PrenotazioneDaoImpl implements PrenotazioneDao {
 
@@ -17,9 +17,9 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 
 	public void loadPrenotazioneTable(String csvFile) {
 
-		EstrattoreDati providerDati = new EstrattoreDati();
+		CsvDataManager providerDati = new CsvDataManager();
 
-		ArrayList<String[]> tabellaDati = providerDati.caricaDaCsv(csvFile, campiTabella);
+		ArrayList<String[]> tabellaDati = providerDati.loadFromCsv(csvFile, campiTabella);
 
 		for (String[] riga : tabellaDati) {
 			Prenotazione prenotazione = new Prenotazione.PrenotazioneBuilder(riga).build();

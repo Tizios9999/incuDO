@@ -15,19 +15,21 @@ import view.UtenteView;
 public class Controller {
 	
 	private Service service;
+	private Scanner scan;
 	
 	public Controller() {
 	       this.service = Service.getInstance();
+	       scan = new Scanner(System.in);
 	    }
 	
-	public void attendiConferma(Scanner scan) {
+	public void attendiConferma() {
 		System.out.println();
 		System.out.println("Premi invio per continuare.");
 	    scan.nextLine();
 		System.out.println();
 	}
 	
-	public Integer controllaNumero(String messaggio, Scanner scan) {
+	public Integer controllaNumero(String messaggio) {
 		
 		Integer n;
 		
@@ -53,7 +55,7 @@ public class Controller {
 		return n;
 	}
 	
-	public String controllaData(String messaggio, Scanner scan) {
+	public String controllaData(String messaggio) {
 		
 		String dataInStringa;
 		
@@ -83,7 +85,33 @@ public class Controller {
 		return dataInStringa;
 	}
 	
-	public String inserisciCampo(String messaggio, Scanner scan) {
+	public String inserisciStrDocValida(String messaggio) {
+		
+		String strDoc;
+		
+		while(true) {
+			
+			System.out.println(messaggio);
+			
+			strDoc = scan.nextLine();
+			
+			boolean contieneCaratteriSpeciali = strDoc.matches(".*[^a-zA-Z0-9 ].*");
+			
+			if (contieneCaratteriSpeciali) {
+				System.out.println("Prego inserire un id documento valido (senza caratteri speciali)");
+				System.out.println();
+			} else {
+				System.out.println(contieneCaratteriSpeciali);
+				break;
+			}
+			
+		}
+		
+		return strDoc;
+	}
+	
+	
+	public String inserisciCampo(String messaggio) {
 		
 		String campo;
 		
@@ -98,9 +126,6 @@ public class Controller {
 		service.caricaDati();
 		CorsoView cView = new CorsoView();
 		UtenteView uView = new UtenteView();
-		
-		@SuppressWarnings("resource")
-		Scanner scan = new Scanner(System.in);
 		
 		Integer choice = -1;
 		
@@ -126,12 +151,12 @@ public class Controller {
 		
 		System.out.println();
 		
-		choice = controllaNumero("Seleziona una opzione e premi invio: ", scan);
+		choice = controllaNumero("Seleziona una opzione e premi invio: ");
 		
 		switch (choice) {
 		case 1:
 			cView.displayCorsi(service.getStringCorsi());
-			attendiConferma(scan);
+			attendiConferma();
 			break;
 		case 2:
 			System.out.println("Prenotazione corsi esistenti");
@@ -141,12 +166,12 @@ public class Controller {
 			uView.displayUtentiLiberi(service.getStringUtentiLiberi());
 			System.out.println();
 				
-			Integer idCorsoDaInserire = controllaNumero("Inserisci ID corso", scan);
-			Integer idUtenteDaInserire = controllaNumero("Inserisci ID utente", scan);
+			Integer idCorsoDaInserire = controllaNumero("Inserisci ID corso");
+			Integer idUtenteDaInserire = controllaNumero("Inserisci ID utente");
 					
 			service.creaPrenotazione(idCorsoDaInserire, idUtenteDaInserire);			
 			
-			attendiConferma(scan);
+			attendiConferma();
 			
 			break;
 		case 3:
@@ -160,31 +185,31 @@ public class Controller {
 			
 			pview.displayPrenotazioniUtentiCorsiAttivi(service.getStringPrenotazioniUtentiCorsi());
 			
-			Integer idCorsoDaCancellare = controllaNumero("Inserisci ID corso", scan);
+			Integer idCorsoDaCancellare = controllaNumero("Inserisci ID corso");
 			System.out.println();
-			Integer idUtenteDaCancellare = controllaNumero("Inserisci ID utente", scan);
+			Integer idUtenteDaCancellare = controllaNumero("Inserisci ID utente");
 			System.out.println();
 				
 			service.disdiciPrenotazione(idCorsoDaCancellare, idUtenteDaCancellare);
 		
-			attendiConferma(scan);
+			attendiConferma();
 			break;
 		case 4:
 			System.out.println("Inserimento nuovo utente");
 			System.out.println();
 			
-			String nomeUtente = inserisciCampo("Inserisci Nome utente: ", scan);
-			String cognomeUtente = inserisciCampo("Inserisci Cognome utente: ", scan);
-			String dataNascitaUtente = controllaData("Inserisci la data di nascita (formato dd/mm/yyyy)", scan);
-			String indirizzoUtente = inserisciCampo("Inserisci indirizzo: ", scan);	
-			String documentoIdUtente = inserisciCampo("Inserisci l'ID del documento di identità: ", scan);
+			String nomeUtente = inserisciCampo("Inserisci Nome utente:");
+			String cognomeUtente = inserisciCampo("Inserisci Cognome utente:");
+			String dataNascitaUtente = controllaData("Inserisci la data di nascita (formato dd/mm/yyyy)");
+			String indirizzoUtente = inserisciCampo("Inserisci indirizzo:");	
+			String documentoIdUtente = inserisciStrDocValida("Inserisci l'ID del documento di identità:");
 			
 			service.aggiungiUtente(nomeUtente, cognomeUtente, dataNascitaUtente, indirizzoUtente, documentoIdUtente);
 			
 			System.out.println("Utente inserito: ");
 			uView.previewUtente(nomeUtente, cognomeUtente, dataNascitaUtente, indirizzoUtente, documentoIdUtente);
 			
-			attendiConferma(scan);
+			attendiConferma();
 			break;
 		case 5:
 			
@@ -192,7 +217,7 @@ public class Controller {
 			
 			service.esportaCsvCorsi();
 			
-			attendiConferma(scan);
+			attendiConferma();
 			break;
 		case 0:
 			System.out.println("Arrivederci!");

@@ -21,12 +21,12 @@ public class UtenteDaoImpl implements UtenteDao {
 	public void loadUtenteTable(String csvFile) {
 		// TODO Auto-generated method stub
 		
-		CsvDataManager providerDati = new CsvDataManager();
+		CsvDataManager dataProvider = new CsvDataManager();
 		
-		ArrayList<String[]> tabellaDati = providerDati.loadFromCsv(csvFile, campiTabella);
+		ArrayList<String[]> dataTable = dataProvider.loadFromCsv(csvFile, campiTabella);
 		
-		for (String[] riga : tabellaDati) {
-			Utente utente = new Utente.UtenteBuilder(riga).build();
+		for (String[] row : dataTable) {
+			Utente utente = new Utente.UtenteBuilder(row).build();
 			listaUtenti.add(utente);
 		}
      		
@@ -45,13 +45,13 @@ public class UtenteDaoImpl implements UtenteDao {
 	
 	public Integer findLastId() {
 		
-		Integer nuovoId = -1;
+		Integer newId = -1;
 		
 		for (Utente utente : this.listaUtenti) {
-			nuovoId = utente.getId() > nuovoId ? utente.getId() : nuovoId;
+			newId = utente.getId() > newId ? utente.getId() : newId;
 		}
 		
-		return nuovoId;
+		return newId;
 	}
 	
 	public List<Utente> getListaUtenti() {

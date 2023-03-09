@@ -8,7 +8,7 @@ import util.CsvDataManager;
 
 public class PrenotazioneDaoImpl implements PrenotazioneDao {
 
-	private String[] campiTabella = { "ID", "ID Attività", "ID Utente", "Data Inizio", "Data Fine" };
+	private String[] tableHeaders = { "ID", "ID Attività", "ID Utente", "Data Inizio", "Data Fine" };
 	private List<Prenotazione> listaPrenotazioni = new ArrayList<Prenotazione>();
 
 	public void addPrenotazione(Prenotazione prenotazione) {
@@ -17,12 +17,12 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 
 	public void loadPrenotazioneTable(String csvFile) {
 
-		CsvDataManager providerDati = new CsvDataManager();
+		CsvDataManager dataProvider = new CsvDataManager();
 
-		ArrayList<String[]> tabellaDati = providerDati.loadFromCsv(csvFile, campiTabella);
+		ArrayList<String[]> dataTable = dataProvider.loadFromCsv(csvFile, tableHeaders);
 
-		for (String[] riga : tabellaDati) {
-			Prenotazione prenotazione = new Prenotazione.PrenotazioneBuilder(riga).build();
+		for (String[] row : dataTable) {
+			Prenotazione prenotazione = new Prenotazione.PrenotazioneBuilder(row).build();
 			this.addPrenotazione(prenotazione);
 		}
 
@@ -32,19 +32,19 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 
 	public Integer firstPrenotazioneIdAvailable(Integer idCorso, Integer idUtente) {
 
-		Integer slotDisponibile = -1;
+		Integer availableSlot = -1;
 
 		for (Prenotazione prenotazione : this.listaPrenotazioni) {
 
 			if (idCorso == prenotazione.getIdAttività() || idUtente == prenotazione.getIdUtente()) {
 				return -1;
 			} else {
-				slotDisponibile = slotDisponibile < prenotazione.getId() ? prenotazione.getId() : slotDisponibile;
+				availableSlot = availableSlot < prenotazione.getId() ? prenotazione.getId() : availableSlot;
 			}
 
 		}
 
-		return slotDisponibile + 1;
+		return availableSlot + 1;
 	}
 
 	public Boolean removePrenotazione(Integer idCorso, Integer idUtente) {

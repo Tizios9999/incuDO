@@ -9,18 +9,18 @@ import util.CsvDataManager;
 
 public class CorsoDaoImpl implements CorsoDao {
 	
-	private String[] campiTabella = {"Id", "Nome", "Descrizione", "Data", "Durata", "Luogo", "Disponibile"};
+	private String[] tableHeaders = {"Id", "Nome", "Descrizione", "Data", "Durata", "Luogo", "Disponibile"};
 	
 	private List<Corso> listaCorsi = new ArrayList<>();
 	
 	public void loadCorsoTable(String csvFile) {
 		
-		CsvDataManager providerDati = new CsvDataManager();
+		CsvDataManager dataProvider = new CsvDataManager();
 		
-		ArrayList<String[]> tabellaDati = providerDati.loadFromCsv(csvFile, campiTabella);
+		ArrayList<String[]> dataTable = dataProvider.loadFromCsv(csvFile, tableHeaders);
 		
-		for (String[] riga : tabellaDati) {
-			Corso corso = new Corso.CorsoBuilder(riga).build();
+		for (String[] row : dataTable) {
+			Corso corso = new Corso.CorsoBuilder(row).build();
 			listaCorsi.add(corso);
 		}
 		
@@ -52,7 +52,7 @@ public class CorsoDaoImpl implements CorsoDao {
 	
 	public void exportCsv() {
 		
-		ArrayList<String[]> listaDaEsportare = new ArrayList<String[]>();
+		ArrayList<String[]> listToExport = new ArrayList<String[]>();
 		
 		String[] headers = {"Id", "Nome", "Descrizione", "Data", "Durata", "Luogo"};
 		
@@ -60,21 +60,21 @@ public class CorsoDaoImpl implements CorsoDao {
 			
 			if (corso.isDisponibile()) {
 				
-				String[] valori = new String[headers.length];
-				valori[0] = String.valueOf(corso.getId());
-				valori[1] = corso.getNome();
-				valori[2] = corso.getDescrizione();
-				valori[3] = String.valueOf(corso.getDataCorso());
-				valori[4] = String.valueOf(corso.getDurata());
-				valori[5] = corso.getLuogo();
-				listaDaEsportare.add(valori);
+				String[] values = new String[headers.length];
+				values[0] = String.valueOf(corso.getId());
+				values[1] = corso.getNome();
+				values[2] = corso.getDescrizione();
+				values[3] = String.valueOf(corso.getDataCorso());
+				values[4] = String.valueOf(corso.getDurata());
+				values[5] = corso.getLuogo();
+				listToExport.add(values);
 			
 			}
 		 
 		}
 		
 		CsvDataManager providerDati = new CsvDataManager();
-		providerDati.writeCsv(headers, listaDaEsportare);
+		providerDati.writeCsv(headers, listToExport);
 	}
 
 	public List<Corso> getListaCorsi() {

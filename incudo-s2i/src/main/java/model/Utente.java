@@ -21,19 +21,19 @@ public class Utente {
 		private String indirizzo;
 		private String documentoId;
 		
-		private static final Map<Integer, String> MAP_CAMPI = new HashMap<>();
+		private static final Map<Integer, String> FIELDS_MAP = new HashMap<>();
 	    static {
-	        MAP_CAMPI.put(0, "id");
-	        MAP_CAMPI.put(1, "nome");
-	        MAP_CAMPI.put(2, "cognome");
-	        MAP_CAMPI.put(3, "dataNascita");
-	        MAP_CAMPI.put(4, "indirizzo");
-	        MAP_CAMPI.put(5, "documentoId");
+	        FIELDS_MAP.put(0, "id");
+	        FIELDS_MAP.put(1, "nome");
+	        FIELDS_MAP.put(2, "cognome");
+	        FIELDS_MAP.put(3, "dataNascita");
+	        FIELDS_MAP.put(4, "indirizzo");
+	        FIELDS_MAP.put(5, "documentoId");
 	    }
 		
 	    public UtenteBuilder(String[] data) {
 	        for (int i = 0; i < data.length; i++) {
-	            String field = MAP_CAMPI.get(i);
+	            String field = FIELDS_MAP.get(i);
 	            if (field != null) {
 	                switch (field) {
 	                    case "id":

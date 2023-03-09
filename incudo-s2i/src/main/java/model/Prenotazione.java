@@ -20,19 +20,19 @@ public class Prenotazione {
 		private LocalDate dataInizio;
 		private LocalDate dataFine;
 		
-		private static final Map<Integer, String> MAP_CAMPI = new HashMap<>();
+		private static final Map<Integer, String> FIELDS_MAP = new HashMap<>();
 	    static {
-	    	 MAP_CAMPI.put(0, "id");
-	         MAP_CAMPI.put(1, "idAttività");
-	         MAP_CAMPI.put(2, "idUtente");
-	         MAP_CAMPI.put(3, "dataInizio");
-	         MAP_CAMPI.put(4, "dataFine");
+	    	 FIELDS_MAP.put(0, "id");
+	         FIELDS_MAP.put(1, "idAttività");
+	         FIELDS_MAP.put(2, "idUtente");
+	         FIELDS_MAP.put(3, "dataInizio");
+	         FIELDS_MAP.put(4, "dataFine");
 	    }
 		
 		public PrenotazioneBuilder(String[] data) {
 			
 			for (int i = 0; i < data.length; i++) {
-	            String field = MAP_CAMPI.get(i);
+	            String field = FIELDS_MAP.get(i);
 	            if (field != null) {
 	                switch (field) {
 	                    case "id":

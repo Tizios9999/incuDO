@@ -24,21 +24,21 @@ public class Corso {
 		private String luogo;
 		private Boolean disponibile;
 		
-		private static final Map<Integer, String> MAP_CAMPI = new HashMap<>();
+		private static final Map<Integer, String> FIELDS_MAP = new HashMap<>();
 	    static {
-	        MAP_CAMPI.put(0, "id");
-	        MAP_CAMPI.put(1, "nome");
-	        MAP_CAMPI.put(2, "descrizione");
-	        MAP_CAMPI.put(3, "dataCorso");
-	        MAP_CAMPI.put(4, "durata");
-	        MAP_CAMPI.put(5, "luogo");
-	        MAP_CAMPI.put(6, "disponibile");
+	        FIELDS_MAP.put(0, "id");
+	        FIELDS_MAP.put(1, "nome");
+	        FIELDS_MAP.put(2, "descrizione");
+	        FIELDS_MAP.put(3, "dataCorso");
+	        FIELDS_MAP.put(4, "durata");
+	        FIELDS_MAP.put(5, "luogo");
+	        FIELDS_MAP.put(6, "disponibile");
 	    }
 		
 		public CorsoBuilder(String[] data) {
 			
 			for (int i = 0; i < data.length; i++) {
-	            String field = MAP_CAMPI.get(i);
+	            String field = FIELDS_MAP.get(i);
 	            if (field != null) {
 	                switch (field) {
 	                    case "id":

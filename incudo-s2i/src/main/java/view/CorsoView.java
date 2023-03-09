@@ -4,9 +4,9 @@ import java.util.List;
 
 public class CorsoView {
 	
-	public void displayCorsi(List<String[]> listaCorsi) {
+	public void displayCorsi(List<String[]> corsiList) {
 		
-		for (String[] corso : listaCorsi) {
+		for (String[] corso : corsiList) {
 			System.out.println();
 			ViewUtils.printBarra(128);
 			System.out.println();
@@ -23,11 +23,11 @@ public class CorsoView {
 		
 	}
 	
-	public void displayCorsiLiberi(List<String[]> listaCorsiLiberi) {
+	public void displayAvailableCorsi(List<String[]> availableCorsiList) {
 		
 		System.out.println("Corsi disponibili:");
 		
-		for (String[] corso : listaCorsiLiberi) {
+		for (String[] corso : availableCorsiList) {
 			System.out.println("ID: " + corso[0] + " / " + "Nome: " + corso[1]);
 		} 
 		

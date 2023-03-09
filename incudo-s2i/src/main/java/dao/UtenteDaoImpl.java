@@ -8,13 +8,13 @@ import util.CsvDataManager;
 
 public class UtenteDaoImpl implements UtenteDao {
 
-	private String[] campiTabella = {"Id", "Nome", "Cognome", "Data di Nascita", "Indirizzo", "Documento ID"};
-	private List<Utente> listaUtenti = new ArrayList<Utente>();
+	private String[] tableHeaders = {"Id", "Nome", "Cognome", "Data di Nascita", "Indirizzo", "Documento ID"};
+	private List<Utente> utentiList = new ArrayList<Utente>();
 	
 	public void addUtente(Utente utente) {
 		// TODO Auto-generated method stub
 		
-		this.listaUtenti.add(utente);
+		this.utentiList.add(utente);
 		
 	}
 
@@ -23,18 +23,18 @@ public class UtenteDaoImpl implements UtenteDao {
 		
 		CsvDataManager dataProvider = new CsvDataManager();
 		
-		ArrayList<String[]> dataTable = dataProvider.loadFromCsv(csvFile, campiTabella);
+		ArrayList<String[]> dataTable = dataProvider.loadFromCsv(csvFile, tableHeaders);
 		
 		for (String[] row : dataTable) {
 			Utente utente = new Utente.UtenteBuilder(row).build();
-			listaUtenti.add(utente);
+			utentiList.add(utente);
 		}
      		
 	}
 	
 	public Utente searchUtenteById(Integer id) {
 		
-		for (Utente utente : this.listaUtenti) {
+		for (Utente utente : this.utentiList) {
 			if (id == utente.getId()) {
 				return utente;
 			}
@@ -47,7 +47,7 @@ public class UtenteDaoImpl implements UtenteDao {
 		
 		Integer newId = -1;
 		
-		for (Utente utente : this.listaUtenti) {
+		for (Utente utente : this.utentiList) {
 			newId = utente.getId() > newId ? utente.getId() : newId;
 		}
 		
@@ -56,6 +56,6 @@ public class UtenteDaoImpl implements UtenteDao {
 	
 	public List<Utente> getListaUtenti() {
 		
-		return listaUtenti;
+		return utentiList;
 	}
 }

@@ -11,6 +11,6 @@ public interface PrenotazioneDao {
 	public Integer firstPrenotazioneIdAvailable(Integer idCorso, Integer idUtente);
 	public Boolean removePrenotazione(Integer idCorso, Integer idUtente);
 	public List<Prenotazione> getListaPrenotazioni();
-	public void setListaPrenotazioni(List<Prenotazione> listaPrenotazioni);
+	public void setListaPrenotazioni(List<Prenotazione> prenotazioniList);
 
 }

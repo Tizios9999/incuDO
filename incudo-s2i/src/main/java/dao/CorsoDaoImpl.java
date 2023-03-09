@@ -11,7 +11,7 @@ public class CorsoDaoImpl implements CorsoDao {
 	
 	private String[] tableHeaders = {"Id", "Nome", "Descrizione", "Data", "Durata", "Luogo", "Disponibile"};
 	
-	private List<Corso> listaCorsi = new ArrayList<>();
+	private List<Corso> corsiList = new ArrayList<>();
 	
 	public void loadCorsoTable(String csvFile) {
 		
@@ -21,14 +21,14 @@ public class CorsoDaoImpl implements CorsoDao {
 		
 		for (String[] row : dataTable) {
 			Corso corso = new Corso.CorsoBuilder(row).build();
-			listaCorsi.add(corso);
+			corsiList.add(corso);
 		}
 		
 	}
 	
 	public Corso searchCorsoById(Integer id) {
 		
-		for (Corso corso : this.listaCorsi) {
+		for (Corso corso : this.corsiList) {
 			
 			if (id == corso.getId()) {
 				return corso;
@@ -38,12 +38,12 @@ public class CorsoDaoImpl implements CorsoDao {
 		return null;
 	}
 	
-	public void setDisponibilitàCorso(Integer id, Boolean disponibile) {
+	public void setDisponibileCorso(Integer id, Boolean available) {
 		
-		for (Corso corso : this.listaCorsi) {
+		for (Corso corso : this.corsiList) {
 			
 			if (id == corso.getId()) {
-				corso.setDisponibile(disponibile);
+				corso.setDisponibile(available);
 				break;
 			}
 		}
@@ -56,7 +56,7 @@ public class CorsoDaoImpl implements CorsoDao {
 		
 		String[] headers = {"Id", "Nome", "Descrizione", "Data", "Durata", "Luogo"};
 		
-		for (Corso corso : this.listaCorsi) {
+		for (Corso corso : this.corsiList) {
 			
 			if (corso.isDisponibile()) {
 				
@@ -79,11 +79,11 @@ public class CorsoDaoImpl implements CorsoDao {
 
 	public List<Corso> getListaCorsi() {
 		
-		return listaCorsi;
+		return corsiList;
 	}
 
-	public void setListaCorsi(List<Corso> listaCorsi) {
-		this.listaCorsi = listaCorsi;
+	public void setListaCorsi(List<Corso> corsiList) {
+		this.corsiList = corsiList;
 	}
 	
 	

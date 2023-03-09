@@ -72,24 +72,23 @@ public class Service {
 
 			// Cerco se c'è una prenotazione disponibile
 
-			Integer nuovoId = this.prenotazioneDaoImpl.firstPrenotazioneIdAvailable(idCorso, idUtente);
+			Integer newId = this.prenotazioneDaoImpl.firstPrenotazioneIdAvailable(idCorso, idUtente);
 
-			if (nuovoId > 0) {
+			if (newId > 0) {
 
-				LocalDate dataInizio = corso.getDataCorso();
-				LocalDate dataFine = dataInizio.plusDays(corso.getDurata() / 24);
+				LocalDate startDate = corso.getDataCorso();
+				LocalDate endDate = startDate.plusDays(corso.getDurata() / 24);
 
-				// creare prenotazione
-
-				System.out.println("Nuova prenotazione corso: " + corso.getNome() + " iscritto " + utente.getNome()
-						+ " da " + dataInizio + " a " + dataFine);
-
-				Prenotazione nuovaPrenotazione = new Prenotazione(nuovoId, corso.getId(), utente.getId(), dataInizio,
-						dataFine);
+				Prenotazione nuovaPrenotazione = new Prenotazione(newId, corso.getId(), utente.getId(), startDate,
+						endDate);
 
 				this.prenotazioneDaoImpl.addPrenotazione(nuovaPrenotazione);
 				
-				corsoDaoImpl.setDisponibilitàCorso(corso.getId(), false);
+				System.out.println("Nuova prenotazione corso: " + corso.getNome()); 
+				System.out.println("Iscritto: " + utente.getNome() + " " + utente.getCognome()); 
+				System.out.println("Da " + startDate + " a " + endDate);
+				
+				corsoDaoImpl.setDisponibileCorso(corso.getId(), false);
 
 			} else {
 				System.out.println("Prenotazione non disponibile");

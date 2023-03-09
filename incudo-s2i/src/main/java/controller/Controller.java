@@ -62,7 +62,7 @@ public void start() {
 		case 2:
 			System.out.println("Prenotazione corsi esistenti");
 			
-			cView.displayCorsiLiberi(service.getStringAvailableCorsi());
+			cView.displayAvailableCorsi(service.getStringAvailableCorsi());
 			System.out.println();
 			uView.displayUtentiLiberi(service.getStringAvailableUtenti());
 			System.out.println();

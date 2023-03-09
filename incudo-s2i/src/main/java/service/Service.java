@@ -213,7 +213,7 @@ public class Service {
 		return listaCorsiStr;
 	}
 	
-	public List<String[]> getListStringAvailableCorsi() {
+	public List<String[]> getStringAvailableCorsi() {
 
 		List<String[]> availableCorsiList = new ArrayList<String[]>();
 

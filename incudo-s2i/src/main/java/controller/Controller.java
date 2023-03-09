@@ -169,7 +169,7 @@ public class Controller {
 		case 2:
 			System.out.println("Prenotazione corsi esistenti");
 			
-			cView.displayCorsiLiberi(service.getListStringAvailableCorsi());
+			cView.displayCorsiLiberi(service.getStringAvailableCorsi());
 			System.out.println();
 			uView.displayUtentiLiberi(service.getStringAvailableUtenti());
 			System.out.println();

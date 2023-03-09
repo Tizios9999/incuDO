@@ -2,6 +2,8 @@ package model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Prenotazione {
 	
@@ -18,14 +20,41 @@ public class Prenotazione {
 		private LocalDate dataInizio;
 		private LocalDate dataFine;
 		
+		private static final Map<Integer, String> MAP_CAMPI = new HashMap<>();
+	    static {
+	    	 MAP_CAMPI.put(0, "id");
+	         MAP_CAMPI.put(1, "idAttività");
+	         MAP_CAMPI.put(2, "idUtente");
+	         MAP_CAMPI.put(3, "dataInizio");
+	         MAP_CAMPI.put(4, "dataFine");
+	    }
+		
 		public PrenotazioneBuilder(String[] data) {
 			
-			this.id = Integer.parseInt(data[0]);
-			this.idAttività = Integer.parseInt(data[1]);
-			this.idUtente = Integer.parseInt(data[2]);
-			this.dataInizio = ModelUtilities.StringToDate(data[3]);
-			this.dataFine = ModelUtilities.StringToDate(data[4]);
-			
+			for (int i = 0; i < data.length; i++) {
+	            String field = MAP_CAMPI.get(i);
+	            if (field != null) {
+	                switch (field) {
+	                    case "id":
+	                        this.id = Integer.parseInt(data[i]);
+	                        break;
+	                    case "idAttività":
+	                        this.idAttività = Integer.parseInt(data[i]);
+	                        break;
+	                    case "idUtente":
+	                        this.idUtente = Integer.parseInt(data[i]);
+	                        break;
+	                    case "dataInizio":
+	                        this.dataInizio = ModelUtilities.StringToDate(data[i]);
+	                        break;
+	                    case "dataFine":
+	                        this.dataFine = ModelUtilities.StringToDate(data[i]);
+	                        break;
+	                    default:
+	                        break;
+	                }
+	            }
+	        }
 		}
 		
 		public Prenotazione build() {

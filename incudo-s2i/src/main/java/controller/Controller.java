@@ -97,11 +97,10 @@ public class Controller {
 			
 			boolean contieneCaratteriSpeciali = strDoc.matches(".*[^a-zA-Z0-9 ].*");
 			
-			if (contieneCaratteriSpeciali) {
+			if (contieneCaratteriSpeciali || strDoc.length() == 0 ) {
 				System.out.println("Prego inserire un id documento valido (senza caratteri speciali)");
 				System.out.println();
 			} else {
-				System.out.println(contieneCaratteriSpeciali);
 				break;
 			}
 			

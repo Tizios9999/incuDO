@@ -1,6 +1,8 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Utente {
 	
@@ -19,15 +21,45 @@ public class Utente {
 		private String indirizzo;
 		private String documentoId;
 		
-		public UtenteBuilder(String[] data) {
-			
-			this.id = Integer.parseInt(data[0]);
-			this.nome = data[1];
-			this.cognome = data[2];
-			this.dataNascita = ModelUtilities.StringToDate(data[3]);
-			this.indirizzo = data[4];
-			this.documentoId = data[5];
-		}
+		private static final Map<Integer, String> MAP_CAMPI = new HashMap<>();
+	    static {
+	        MAP_CAMPI.put(0, "id");
+	        MAP_CAMPI.put(1, "nome");
+	        MAP_CAMPI.put(2, "cognome");
+	        MAP_CAMPI.put(3, "dataNascita");
+	        MAP_CAMPI.put(4, "indirizzo");
+	        MAP_CAMPI.put(5, "documentoId");
+	    }
+		
+	    public UtenteBuilder(String[] data) {
+	        for (int i = 0; i < data.length; i++) {
+	            String field = MAP_CAMPI.get(i);
+	            if (field != null) {
+	                switch (field) {
+	                    case "id":
+	                        this.id = Integer.parseInt(data[i]);
+	                        break;
+	                    case "nome":
+	                        this.nome = data[i];
+	                        break;
+	                    case "cognome":
+	                        this.cognome = data[i];
+	                        break;
+	                    case "dataNascita":
+	                        this.dataNascita = ModelUtilities.StringToDate(data[i]);
+	                        break;
+	                    case "indirizzo":
+	                        this.indirizzo = data[i];
+	                        break;
+	                    case "documentoId":
+	                        this.documentoId = data[i];
+	                        break;
+	                    default:
+	                        break;
+	                }
+	            }
+	        }
+	    }
 		
 		public Utente build() {
 			return new Utente(this);

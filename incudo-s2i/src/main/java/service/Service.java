@@ -108,6 +108,9 @@ public class Service {
 		} else {
 
 			if (this.prenotazioneDaoImpl.removePrenotazione(idCorso, idUtente)) {
+				
+				corsoDaoImpl.setDisponibileCorso(corso.getId(), true);
+				
 				System.out.println("Prenotazione cancellata");
 			} else {
 				System.out.println("Prenotazione non trovata");

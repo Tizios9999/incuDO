@@ -6,10 +6,10 @@ import model.Utente;
 
 public interface UtenteDao {
 	
-	public void inserisciUtente(Utente utente);
-	public void caricaUtenti(String csvPath);
-	public Utente cercaUtentePerId(Integer id); 
-	public Integer trovaUltimoId();
+	public void addUtente(Utente utente);
+	public void loadUtenteTable(String csvPath);
+	public Utente searchUtenteById(Integer id); 
+	public Integer findLastId();
 	public List<Utente> getListaUtenti();
 	
 }

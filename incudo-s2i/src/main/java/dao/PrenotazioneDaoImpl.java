@@ -11,11 +11,11 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 	private String[] campiTabella = { "ID", "ID Attività", "ID Utente", "Data Inizio", "Data Fine" };
 	private List<Prenotazione> listaPrenotazioni = new ArrayList<Prenotazione>();
 
-	public void aggiungiPrenotazione(Prenotazione prenotazione) {
+	public void addPrenotazione(Prenotazione prenotazione) {
 		this.listaPrenotazioni.add(prenotazione);
 	}
 
-	public void caricaPrenotazioni(String csvFile) {
+	public void loadPrenotazioneTable(String csvFile) {
 
 		EstrattoreDati providerDati = new EstrattoreDati();
 
@@ -23,14 +23,14 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 
 		for (String[] riga : tabellaDati) {
 			Prenotazione prenotazione = new Prenotazione.PrenotazioneBuilder(riga).build();
-			this.aggiungiPrenotazione(prenotazione);
+			this.addPrenotazione(prenotazione);
 		}
 
 	}
 
 	// Returns an Integer with the first id available to ensure unique id
 
-	public Integer disponibilitàIdPrenotazione(Integer idCorso, Integer idUtente) {
+	public Integer firstPrenotazioneIdAvailable(Integer idCorso, Integer idUtente) {
 
 		Integer slotDisponibile = -1;
 
@@ -47,7 +47,7 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 		return slotDisponibile + 1;
 	}
 
-	public Boolean cancellaPrenotazione(Integer idCorso, Integer idUtente) {
+	public Boolean removePrenotazione(Integer idCorso, Integer idUtente) {
 
 		for (Prenotazione prenotazione : this.listaPrenotazioni) {
 

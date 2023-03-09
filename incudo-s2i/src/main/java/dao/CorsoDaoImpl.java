@@ -7,13 +7,13 @@ import java.util.List;
 import model.Corso;
 import util.EstrattoreDati;
 
-public class CorsoDaoImpl {
+public class CorsoDaoImpl implements CorsoDao {
 	
 	private String[] campiTabella = {"Id", "Nome", "Descrizione", "Data", "Durata", "Luogo", "Disponibile"};
 	
 	private List<Corso> listaCorsi = new ArrayList<>();
 	
-	public void caricaCorsi(String csvFile) {
+	public void loadCorsoTable(String csvFile) {
 		
 		EstrattoreDati providerDati = new EstrattoreDati();
 		
@@ -26,7 +26,7 @@ public class CorsoDaoImpl {
 		
 	}
 	
-	public Corso cercaCorsoPerId(Integer id) {
+	public Corso searchCorsoById(Integer id) {
 		
 		for (Corso corso : this.listaCorsi) {
 			
@@ -50,7 +50,7 @@ public class CorsoDaoImpl {
 		
 	}
 	
-	public void esportaCsv() {
+	public void exportCsv() {
 		
 		ArrayList<String[]> listaDaEsportare = new ArrayList<String[]>();
 		

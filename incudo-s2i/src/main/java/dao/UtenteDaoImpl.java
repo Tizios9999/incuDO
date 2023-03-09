@@ -11,14 +11,14 @@ public class UtenteDaoImpl implements UtenteDao {
 	private String[] campiTabella = {"Id", "Nome", "Cognome", "Data di Nascita", "Indirizzo", "Documento ID"};
 	private List<Utente> listaUtenti = new ArrayList<Utente>();
 	
-	public void inserisciUtente(Utente utente) {
+	public void addUtente(Utente utente) {
 		// TODO Auto-generated method stub
 		
 		this.listaUtenti.add(utente);
 		
 	}
 
-	public void caricaUtenti(String csvFile) {
+	public void loadUtenteTable(String csvFile) {
 		// TODO Auto-generated method stub
 		
 		EstrattoreDati providerDati = new EstrattoreDati();
@@ -32,7 +32,7 @@ public class UtenteDaoImpl implements UtenteDao {
      		
 	}
 	
-	public Utente cercaUtentePerId(Integer id) {
+	public Utente searchUtenteById(Integer id) {
 		
 		for (Utente utente : this.listaUtenti) {
 			if (id == utente.getId()) {
@@ -43,7 +43,7 @@ public class UtenteDaoImpl implements UtenteDao {
 		return null;
 	}
 	
-	public Integer trovaUltimoId() {
+	public Integer findLastId() {
 		
 		Integer nuovoId = -1;
 		

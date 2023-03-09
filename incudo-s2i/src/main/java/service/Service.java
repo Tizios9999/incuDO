@@ -38,14 +38,14 @@ public class Service {
 		return service;
 	}
 
-	public void caricaDati() {
+	public void loadTablesData() {
 		this.corsoDaoImpl = new CorsoDaoImpl();
 		this.utenteDaoImpl = new UtenteDaoImpl();
 		this.prenotazioneDaoImpl = new PrenotazioneDaoImpl();
 
-		corsoDaoImpl.caricaCorsi("corsi.csv");
-		utenteDaoImpl.caricaUtenti("utenti.csv");
-		prenotazioneDaoImpl.caricaPrenotazioni("prenotazioni.csv");
+		corsoDaoImpl.loadCorsoTable("corsi.csv");
+		utenteDaoImpl.loadUtenteTable("utenti.csv");
+		prenotazioneDaoImpl.loadPrenotazioneTable("prenotazioni.csv");
 
 	}
 	
@@ -58,13 +58,13 @@ public class Service {
 		return formattedDate;
 	}
 
-	public void creaPrenotazione(Integer idCorso, Integer idUtente) {
+	public void createPrenotazione(Integer idCorso, Integer idUtente) {
 
 		// Controlla se prenotazione già esistente
 
-		Corso corso = this.corsoDaoImpl.cercaCorsoPerId(idCorso);
+		Corso corso = this.corsoDaoImpl.searchCorsoById(idCorso);
 
-		Utente utente = this.utenteDaoImpl.cercaUtentePerId(idUtente);
+		Utente utente = this.utenteDaoImpl.searchUtenteById(idUtente);
 
 		if (utente == null || corso == null) {
 			System.out.println("Corso o utente non trovato");
@@ -72,7 +72,7 @@ public class Service {
 
 			// Cerco se c'è una prenotazione disponibile
 
-			Integer nuovoId = this.prenotazioneDaoImpl.disponibilitàIdPrenotazione(idCorso, idUtente);
+			Integer nuovoId = this.prenotazioneDaoImpl.firstPrenotazioneIdAvailable(idCorso, idUtente);
 
 			if (nuovoId > 0) {
 
@@ -87,7 +87,7 @@ public class Service {
 				Prenotazione nuovaPrenotazione = new Prenotazione(nuovoId, corso.getId(), utente.getId(), dataInizio,
 						dataFine);
 
-				this.prenotazioneDaoImpl.aggiungiPrenotazione(nuovaPrenotazione);
+				this.prenotazioneDaoImpl.addPrenotazione(nuovaPrenotazione);
 				
 				corsoDaoImpl.setDisponibilitàCorso(corso.getId(), false);
 
@@ -99,16 +99,16 @@ public class Service {
 
 	}
 
-	public void disdiciPrenotazione(Integer idCorso, Integer idUtente) {
+	public void cancelPrenotazione(Integer idCorso, Integer idUtente) {
 
-		Corso corso = this.corsoDaoImpl.cercaCorsoPerId(idCorso);
-		Utente utente = this.utenteDaoImpl.cercaUtentePerId(idUtente);
+		Corso corso = this.corsoDaoImpl.searchCorsoById(idCorso);
+		Utente utente = this.utenteDaoImpl.searchUtenteById(idUtente);
 
 		if (utente == null || corso == null) {
 			System.out.println("Corso o utente non trovato");
 		} else {
 
-			if (this.prenotazioneDaoImpl.cancellaPrenotazione(idCorso, idUtente)) {
+			if (this.prenotazioneDaoImpl.removePrenotazione(idCorso, idUtente)) {
 				System.out.println("Prenotazione cancellata");
 			} else {
 				System.out.println("Prenotazione non trovata");
@@ -118,22 +118,22 @@ public class Service {
 
 	}
 
-	public void aggiungiUtente(String nome, String cognome, String dataNascita, String indirizzoUtente,
+	public void createNewUtente(String nome, String cognome, String dataNascita, String indirizzoUtente,
 			String documentoIdUtente) {
 
-		String id = String.valueOf(this.utenteDaoImpl.trovaUltimoId() + 1);
+		String id = String.valueOf(this.utenteDaoImpl.findLastId() + 1);
 
 		String[] arrayUtente = { id, nome, cognome, dataNascita, indirizzoUtente, documentoIdUtente };
 
 		Utente utente = new Utente.UtenteBuilder(arrayUtente).build();
 
-		this.utenteDaoImpl.inserisciUtente(utente);
+		this.utenteDaoImpl.addUtente(utente);
 
 	}
 
-	public void esportaCsvCorsi() {
+	public void exportCorsoCsvTable() {
 
-		this.corsoDaoImpl.esportaCsv();
+		this.corsoDaoImpl.exportCsv();
 
 	}
 
@@ -171,8 +171,8 @@ public class Service {
 
 		for (Prenotazione prenotazione : listaPrenotazioni) {
 			
-			Utente utente = this.utenteDaoImpl.cercaUtentePerId(prenotazione.getIdUtente());
-			Corso corso = this.corsoDaoImpl.cercaCorsoPerId(prenotazione.getIdAttività());
+			Utente utente = this.utenteDaoImpl.searchUtenteById(prenotazione.getIdUtente());
+			Corso corso = this.corsoDaoImpl.searchCorsoById(prenotazione.getIdAttività());
 			
 			String id = prenotazione.getId().toString();
 			String idCorso = prenotazione.getIdAttività().toString();
@@ -213,31 +213,31 @@ public class Service {
 		return listaCorsiStr;
 	}
 	
-	public List<String[]> getStringCorsiLiberi() {
+	public List<String[]> getListStringAvailableCorsi() {
 
-		List<String[]> listaCorsiLiberi = new ArrayList<String[]>();
+		List<String[]> availableCorsiList = new ArrayList<String[]>();
 
-		List<Corso> listaCorsi = corsoDaoImpl.getListaCorsi();
+		List<Corso> corsiList = corsoDaoImpl.getListaCorsi();
 		
-		for (Corso corso : listaCorsi) {
+		for (Corso corso : corsiList) {
 			
 			if (corso.isDisponibile()) {
 				String idCorso = String.valueOf(corso.getId());
 				String nomeCorso = corso.getNome();
 				String[] corsoStr = { idCorso, nomeCorso };
-				listaCorsiLiberi.add(corsoStr);
+				availableCorsiList.add(corsoStr);
 			}
 
 		}
 
-		return listaCorsiLiberi;
+		return availableCorsiList;
 	}
 	
-	public List<String[]> getStringUtentiLiberi() {
+	public List<String[]> getStringAvailableUtenti() {
 
-		List<String[]> listaUtentiLiberi = new ArrayList<String[]>();
+		List<String[]> availableUtentiList = new ArrayList<String[]>();
 
-		List<Utente> listaUtenti = utenteDaoImpl.getListaUtenti();
+		List<Utente> utentiList = utenteDaoImpl.getListaUtenti();
 		
 		List<Integer> idUtentiPrenotati = new ArrayList<Integer>();
 		
@@ -245,17 +245,17 @@ public class Service {
 			idUtentiPrenotati.add(prenotazione.getIdUtente());
 		}
 		
-		for (Utente utente : listaUtenti) {
+		for (Utente utente : utentiList) {
 			
 			if (!idUtentiPrenotati.contains(utente.getId())) {
 				String idUtente = String.valueOf(utente.getId());
 				String nomeUtente = utente.getNome() + " " + utente.getCognome();
 				String[] utenteStr = { idUtente, nomeUtente };
-				listaUtentiLiberi.add(utenteStr);
+				availableUtentiList.add(utenteStr);
 			}
 
 		}
 
-		return listaUtentiLiberi;
+		return availableUtentiList;
 	}
 }

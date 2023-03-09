@@ -29,6 +29,7 @@ public class Controller {
 		System.out.println();
 	}
 	
+	
 	public Integer controllaNumero(String messaggio) {
 		
 		Integer n;
@@ -97,7 +98,8 @@ public class Controller {
 			
 			boolean contieneCaratteriSpeciali = strDoc.matches(".*[^a-zA-Z0-9 ].*");
 			
-			if (contieneCaratteriSpeciali || strDoc.length() == 0 ) {
+			
+			if (contieneCaratteriSpeciali || strDoc.isBlank() ) {
 				System.out.println("Prego inserire un id documento valido (senza caratteri speciali)");
 				System.out.println();
 			} else {
@@ -114,15 +116,22 @@ public class Controller {
 		
 		String campo;
 		
-		System.out.println(messaggio);
-		campo = scan.nextLine();
+		while(true) {
+			
+			System.out.println(messaggio);
+			campo = scan.nextLine();
+			
+			if (!campo.isBlank()) {
+				break;
+			}
+		}
 		
 		return campo;
 	}
 	
 	public void start() {
 		
-		service.caricaDati();
+		service.loadTablesData();
 		CorsoView cView = new CorsoView();
 		UtenteView uView = new UtenteView();
 		
@@ -160,15 +169,15 @@ public class Controller {
 		case 2:
 			System.out.println("Prenotazione corsi esistenti");
 			
-			cView.displayCorsiLiberi(service.getStringCorsiLiberi());
+			cView.displayCorsiLiberi(service.getListStringAvailableCorsi());
 			System.out.println();
-			uView.displayUtentiLiberi(service.getStringUtentiLiberi());
+			uView.displayUtentiLiberi(service.getStringAvailableUtenti());
 			System.out.println();
 				
 			Integer idCorsoDaInserire = controllaNumero("Inserisci ID corso");
 			Integer idUtenteDaInserire = controllaNumero("Inserisci ID utente");
 					
-			service.creaPrenotazione(idCorsoDaInserire, idUtenteDaInserire);			
+			service.createPrenotazione(idCorsoDaInserire, idUtenteDaInserire);			
 			
 			attendiConferma();
 			
@@ -189,7 +198,7 @@ public class Controller {
 			Integer idUtenteDaCancellare = controllaNumero("Inserisci ID utente");
 			System.out.println();
 				
-			service.disdiciPrenotazione(idCorsoDaCancellare, idUtenteDaCancellare);
+			service.cancelPrenotazione(idCorsoDaCancellare, idUtenteDaCancellare);
 		
 			attendiConferma();
 			break;
@@ -203,7 +212,7 @@ public class Controller {
 			String indirizzoUtente = inserisciCampo("Inserisci indirizzo:");	
 			String documentoIdUtente = inserisciStrDocValida("Inserisci l'ID del documento di identità:");
 			
-			service.aggiungiUtente(nomeUtente, cognomeUtente, dataNascitaUtente, indirizzoUtente, documentoIdUtente);
+			service.createNewUtente(nomeUtente, cognomeUtente, dataNascitaUtente, indirizzoUtente, documentoIdUtente);
 			
 			System.out.println("Utente inserito: ");
 			uView.previewUtente(nomeUtente, cognomeUtente, dataNascitaUtente, indirizzoUtente, documentoIdUtente);
@@ -214,7 +223,7 @@ public class Controller {
 			
 			// Export all available courses to CSV File
 			
-			service.esportaCsvCorsi();
+			service.exportCorsoCsvTable();
 			
 			attendiConferma();
 			break;

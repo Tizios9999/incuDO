@@ -67,10 +67,10 @@ public void start() {
 			uView.displayUtentiLiberi(service.getStringAvailableUtenti());
 			System.out.println();
 				
-			Integer idCorsoDaInserire = insertCheckedNumber("Inserisci ID corso");
-			Integer idUtenteDaInserire = insertCheckedNumber("Inserisci ID utente");
+			Integer idCorsoToBeInserted = insertCheckedNumber("Inserisci ID corso");
+			Integer idUtenteToBeInserted = insertCheckedNumber("Inserisci ID utente");
 					
-			service.createPrenotazione(idCorsoDaInserire, idUtenteDaInserire);			
+			service.createPrenotazione(idCorsoToBeInserted, idUtenteToBeInserted);			
 			
 			waitForConfirmation();
 			
@@ -86,12 +86,12 @@ public void start() {
 			
 			pview.displayPrenotazioniUtentiCorsiAttivi(service.getStringPrenotazioniUtentiCorsi());
 			
-			Integer idCorsoDaCancellare = insertCheckedNumber("Inserisci ID corso");
+			Integer idCorsoToDelete = insertCheckedNumber("Inserisci ID corso");
 			System.out.println();
-			Integer idUtenteDaCancellare = insertCheckedNumber("Inserisci ID utente");
+			Integer idUtenteToDelete = insertCheckedNumber("Inserisci ID utente");
 			System.out.println();
 				
-			service.cancelPrenotazione(idCorsoDaCancellare, idUtenteDaCancellare);
+			service.cancelPrenotazione(idCorsoToDelete, idUtenteToDelete);
 		
 			waitForConfirmation();
 			break;

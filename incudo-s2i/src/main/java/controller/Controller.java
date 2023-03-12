@@ -1,13 +1,10 @@
 package controller;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import dao.CorsoDaoImpl;
 import service.Service;
+import util.DataValidator;
 import view.CorsoView;
 import view.PrenotazioneView;
 import view.UtenteView;
@@ -87,9 +84,7 @@ public void start() {
 			pview.displayPrenotazioniUtentiCorsiAttivi(service.getStringPrenotazioniUtentiCorsi());
 			
 			Integer idCorsoToDelete = insertCheckedNumber("Inserisci ID corso");
-			System.out.println();
 			Integer idUtenteToDelete = insertCheckedNumber("Inserisci ID utente");
-			System.out.println();
 				
 			service.cancelPrenotazione(idCorsoToDelete, idUtenteToDelete);
 		
@@ -143,101 +138,89 @@ public void start() {
 	
 	private Integer insertCheckedNumber(String message) {
 		
-		Integer n;
+		String data = null;
+
+		System.out.println(message);
 		
-		while(true) {
+		boolean valid = false;
+		
+		while(!valid) {
 			
-			try {
-				
-				System.out.println(message);
-				n = scan.nextInt();
-				break;
+			data = scan.nextLine();
+
+			valid = DataValidator.isValidData("Integer", data);
 			
-			} catch(InputMismatchException e) {
-				
-				System.out.println("Prego inserire un numero.");
-				scan.nextLine();
-				System.out.println();
+			if (!valid) {
+				System.out.println("Prego inserire un numero maggiore di 0:");
 			} 
-			
 		}
 		
-		scan.nextLine(); // This is to clean the scanner buffer.
+		return Integer.parseInt(data);
 		
-		return n;
 	}
 	
 	private String insertCheckedDate(String message) {
 		
-		String stringDate;
+		String data = null;
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
-		while(true) {
+		boolean valid = false;
+		
+		System.out.println(message);
+		
+		while(!valid) {
 			
-			try {
-				
-				System.out.println(message);
-				
-				stringDate = scan.nextLine();
-				
-				// If the following date is not parsed correctly, I will catch the error
-				LocalDate dateToCheck = LocalDate.parse(stringDate, formatter); 
-				
-				break;
+			data = scan.nextLine();
+
+			valid = DataValidator.isValidData("Date", data);
 			
-			} catch(DateTimeParseException e) {
-				
-				System.out.println("Il formato della data non è corretto.");
-				System.out.println();
+			if (!valid) {
+				System.out.println("Prego inserire una data corretta:");
 			} 
-			
 		}
 		
-		return stringDate;
+		return data;
 	}
 	
 	private String insertValidDoc(String message) {
 		
-		String strDoc;
+		String data = null;
 		
-		while(true) {
+		boolean valid = false;
+		
+		System.out.println(message);
+		
+		while(!valid) {
 			
-			System.out.println(message);
+			data = scan.nextLine();
+
+			valid = DataValidator.isValidData("Alfanumeric", data);
 			
-			strDoc = scan.nextLine();
-			
-			boolean hasSpecialCharacters = strDoc.matches(".*[^a-zA-Z0-9 ].*");
-			
-			
-			if (hasSpecialCharacters || strDoc.isBlank() ) {
-				System.out.println("Prego inserire un id documento valido (senza caratteri speciali)");
-				System.out.println();
-			} else {
-				break;
-			}
-			
+			if (!valid) {
+				System.out.println("Prego inserire un codice alfanumerico senza caratteri speciali:");
+			} 
 		}
 		
-		return strDoc;
-	}
-	
+		return data;
+
+	}	
 	
 	private String insertField(String message) {
 		
-		String field;
+		String data;
 		
 		while(true) {
 			
 			System.out.println(message);
-			field = scan.nextLine();
+			data = scan.nextLine();
 			
-			if (!field.isBlank()) {
+			if (!data.isBlank()) {
 				break;
 			}
 		}
 		
-		return field;
+		return data;
 	}
 	
 	

@@ -5,10 +5,17 @@ import java.util.List;
 
 import model.Prenotazione;
 import util.CsvDataManager;
+import util.DataValidator;
 
 public class PrenotazioneDaoImpl implements PrenotazioneDao {
 
-	private String[] tableHeaders = { "ID", "ID Attività", "ID Utente", "Data Inizio", "Data Fine" };
+	private String[][] tableHeaders = { 
+			{"ID", "Integer"},
+			{"ID Attività", "Integer"},
+			{"ID Utente", "Integer"},
+			{"Data Inizio", "Date"},
+			{"Data Fine", "Date"}
+	};
 	private List<Prenotazione> prenotazioniList = new ArrayList<Prenotazione>();
 
 	public void addPrenotazione(Prenotazione prenotazione) {
@@ -22,6 +29,22 @@ public class PrenotazioneDaoImpl implements PrenotazioneDao {
 		ArrayList<String[]> dataTable = dataProvider.loadFromCsv(csvFile, tableHeaders);
 
 		for (String[] row : dataTable) {
+			
+			for (int i = 0; i < tableHeaders.length; i++) {
+				
+				String type = tableHeaders[i][1];
+				
+				if (!DataValidator.isValidData(type, row[i])) {
+					
+					int numRiga = dataTable.indexOf(row) + 1;
+					
+					String errore = "Errore durante la lettura del file " + csvFile + " nella colonna " + tableHeaders[i][0] + " alla riga " + numRiga +". Ricontrollare il file e riprovare a riavviare l'applicazione.";
+					
+					throw new RuntimeException(errore);
+				}
+				
+			}
+			
 			Prenotazione prenotazione = new Prenotazione.PrenotazioneBuilder(row).build();
 			this.addPrenotazione(prenotazione);
 		}

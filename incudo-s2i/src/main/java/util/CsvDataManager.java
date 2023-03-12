@@ -19,7 +19,7 @@ import com.opencsv.ICSVWriter;
 
 public class CsvDataManager {
 	
-	public ArrayList<String[]> loadFromCsv(String csvFile, String[] fieldsTable) {
+	public ArrayList<String[]> loadFromCsv(String csvFile, String[][] fieldsTable) {
 		// TODO Auto-generated method stub
 		
 		String csvPath = "src\\main\\resources\\" + csvFile;

@@ -6,10 +6,19 @@ import java.util.List;
 
 import model.Corso;
 import util.CsvDataManager;
+import util.DataValidator;
 
 public class CorsoDaoImpl implements CorsoDao {
 	
-	private String[] tableHeaders = {"Id", "Nome", "Descrizione", "Data", "Durata", "Luogo", "Disponibile"};
+	private String[][] tableHeaders = {
+			{"Id", "Integer"}, 
+			{"Nome", "String"},
+			{"Descrizione", "String"}, 
+			{"Data", "Date"}, 
+			{"Durata", "Integer"},
+			{"Luogo", "String"}, 
+			{"Disponibile", "Disponibile"}
+			};
 	
 	private List<Corso> corsiList = new ArrayList<>();
 	
@@ -20,6 +29,22 @@ public class CorsoDaoImpl implements CorsoDao {
 		ArrayList<String[]> dataTable = dataProvider.loadFromCsv(csvFile, tableHeaders);
 		
 		for (String[] row : dataTable) {
+			
+			for (int i = 0; i < tableHeaders.length; i++) {
+				
+				String type = tableHeaders[i][1];
+				
+				if (!DataValidator.isValidData(type, row[i])) {
+					
+					int numRiga = dataTable.indexOf(row) + 1;
+					
+					String errore = "Errore durante la lettura del file " + csvFile + " nella colonna " + tableHeaders[i][0] + " alla riga " + numRiga +". Ricontrollare il file e riprovare a riavviare l'applicazione.";
+					
+					throw new RuntimeException(errore);
+				}
+				
+			}
+			
 			Corso corso = new Corso.CorsoBuilder(row).build();
 			corsiList.add(corso);
 		}

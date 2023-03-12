@@ -114,7 +114,7 @@ public class DataValidator {
 		
 		Boolean valid = false;
 		
-		if (data == "SI" || data == "NO") {
+		if (data.equals("SI") || data.equals("NO")) {
 			
 			valid = true;
 		

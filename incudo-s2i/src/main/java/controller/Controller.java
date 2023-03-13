@@ -9,6 +9,17 @@ import view.CorsoView;
 import view.PrenotazioneView;
 import view.UtenteView;
 
+/**
+ * The main purpose of the controller is user interaction,
+ * as to show the possible options available, read and validate 
+ * input received from the user.
+ * 
+ * 
+ * @author Davide Santonocito
+ *
+ */
+
+
 public class Controller {
 	
 	private Service service;
@@ -18,6 +29,10 @@ public class Controller {
 	       this.service = Service.getInstance();
 	       scan = new Scanner(System.in);
 	    }
+	/**
+	 * Starts the controller.
+	 * Interacts with service, view and user.
+	 */
 	
 public void start() {
 		
@@ -128,6 +143,10 @@ public void start() {
 		
 		}
 	
+	/**
+	 * This method is used to pause the flow of application for user experience.
+	 */
+
 	private void waitForConfirmation() {
 		System.out.println();
 		System.out.println("Premi invio per continuare.");
@@ -135,19 +154,27 @@ public void start() {
 		System.out.println();
 	}
 	
+	/**
+	 * This method will read a string input from the user 
+	 * and returns a parsed integer. If the value is less than 0
+	 * or is not possible to parse it, the user will be asked to
+	 * insert it again.
+	 * 
+	 * @param message the message asking for user input, customizable
+	 * @return the value read converted to Integer.
+	 */
 	
 	private Integer insertCheckedNumber(String message) {
 		
 		String data = null;
-
+		
 		System.out.println(message);
 		
 		boolean valid = false;
 		
 		while(!valid) {
-			
+		
 			data = scan.nextLine();
-
 			valid = DataValidator.isValidData("Integer", data);
 			
 			if (!valid) {
@@ -159,12 +186,20 @@ public void start() {
 		
 	}
 	
+	/**
+	 * This method will read a String input and check if it can be
+	 * parsed to a LocalDate variable.
+	 * If yes, the same string is returned.
+	 * If no, input is asked again.
+	 * 
+	 * @param message the message asking for user input, customizable
+	 * @return the same value read in String format.
+	 */
+	
 	private String insertCheckedDate(String message) {
 		
 		String data = null;
-		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		
 		boolean valid = false;
 		
 		System.out.println(message);
@@ -172,7 +207,6 @@ public void start() {
 		while(!valid) {
 			
 			data = scan.nextLine();
-
 			valid = DataValidator.isValidData("Date", data);
 			
 			if (!valid) {
@@ -183,10 +217,19 @@ public void start() {
 		return data;
 	}
 	
+	/**
+	 * This method will read a String input and check if contains
+	 * only Alfanumeric characters. Used for document ID type of input.
+	 * If yes, the same string is returned.
+	 * If no, input is asked again.
+	 * 
+	 * @param message the message asking for user input, customizable
+	 * @return the same value read in String format.
+	 */
+	
 	private String insertValidDoc(String message) {
 		
 		String data = null;
-		
 		boolean valid = false;
 		
 		System.out.println(message);
@@ -194,7 +237,6 @@ public void start() {
 		while(!valid) {
 			
 			data = scan.nextLine();
-
 			valid = DataValidator.isValidData("Alfanumeric", data);
 			
 			if (!valid) {
@@ -205,6 +247,15 @@ public void start() {
 		return data;
 
 	}	
+	
+	/**
+	 * This method will read a String input and check if it's not
+	 * blank. When the first non-blank String is read, the value
+	 * is returned.
+	 * 
+	 * @param message the message asking for user input, customizable
+	 * @return the same value read in String format.
+	 */
 	
 	private String insertField(String message) {
 		

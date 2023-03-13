@@ -5,6 +5,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The Corso model represents a course entity in the system.
+ * It contains information about the course such as its name, description, location,
+ * date, duration and availability.
+ */
+
 public class Corso {
 
 	private Integer id;
@@ -15,6 +21,10 @@ public class Corso {
 	private String luogo;
 	private Boolean disponibile;
 	
+	/**
+	 * A builder class used to create instances of Corso.
+	 */
+	
 	public static class CorsoBuilder {
 		private Integer id;
 		private String nome;
@@ -23,6 +33,12 @@ public class Corso {
 		private Integer durata;
 		private String luogo;
 		private Boolean disponibile;
+		
+		/**
+		 * FIELDS_MAP is an Hashmap that links the String array positions that
+		 * will be used to build the Corso object with the object corresponding
+		 * properties. This is for keeping the code more readable.
+		 */
 		
 		private static final Map<Integer, String> FIELDS_MAP = new HashMap<>();
 	    static {
@@ -35,6 +51,12 @@ public class Corso {
 	        FIELDS_MAP.put(6, "disponibile");
 	    }
 		
+	    /**
+		 * Constructs a new instance of CorsoBuilder using the given data.
+		 *
+		 * @param data the data to use for building the Corso
+		 */
+	    
 		public CorsoBuilder(String[] data) {
 			
 			for (int i = 0; i < data.length; i++) {
@@ -69,10 +91,22 @@ public class Corso {
 	        }
 		}
 		
+		/**
+		 * Builds and returns a new instance of Corso using the data provided to the builder.
+		 *	
+		 * @return a new instance of Corso
+		 */
+		
 		public Corso build() {
 			return new Corso(this);
 		}
 	}
+	
+	/**
+	 * Constructs a new instance of Corso using the provided builder.
+	 * 
+	 * @param builder the builder to use for constructing the Corso
+	 */
 	
 	private Corso(CorsoBuilder builder) {
 		this.id = builder.id;
@@ -83,6 +117,8 @@ public class Corso {
 		this.luogo = builder.luogo;
 		this.disponibile = builder.disponibile;
 	}
+	
+	// Getters and Setters
 	
 	public int getId() {
 		return id;

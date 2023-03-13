@@ -4,6 +4,12 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The Utente model represents a course entity in the system.
+ * It contains information about the course such as its name, surname, 
+ * birth date, address and document ID code.
+ */
+
 public class Utente {
 	
 	private Integer id;
@@ -21,6 +27,12 @@ public class Utente {
 		private String indirizzo;
 		private String documentoId;
 		
+		/**
+		 * FIELDS_MAP is an Hashmap that links the String array positions that
+		 * will be used to build the Utente object with the object corresponding
+		 * properties. This is for keeping the code more readable.
+		 */
+		
 		private static final Map<Integer, String> FIELDS_MAP = new HashMap<>();
 	    static {
 	        FIELDS_MAP.put(0, "id");
@@ -31,6 +43,12 @@ public class Utente {
 	        FIELDS_MAP.put(5, "documentoId");
 	    }
 		
+	    /**
+	     * Creates a new instance of the {@link UtenteBuilder} class with the given input data.
+	     * 
+	     * @param data the input data used to create the user
+	     */
+	    
 	    public UtenteBuilder(String[] data) {
 	        for (int i = 0; i < data.length; i++) {
 	            String field = FIELDS_MAP.get(i);
@@ -61,10 +79,20 @@ public class Utente {
 	        }
 	    }
 		
+	    /**
+	     * Creates a new instance of the {@link Utente} class using the data stored in this builder.
+	     * 
+	     * @return a new instance of the {@link Utente} class
+	     */
+	    
 		public Utente build() {
 			return new Utente(this);
 		}
 	}
+	
+	/**
+	 * Creates a new instance of the {@link Utente} class with the given parameters.
+	*/
 	
 	private Utente(UtenteBuilder builder) {
 		this.id = builder.id;
@@ -74,6 +102,8 @@ public class Utente {
 		this.indirizzo = builder.indirizzo;
 		this.documentoId = builder.documentoId;
 	}
+	
+	// Getters and Setters
 	
 	public int getId() {
 		return id;
@@ -86,7 +116,6 @@ public class Utente {
 		try {
 			this.id = Integer.parseInt(id);
 		}
-		
 		catch (NumberFormatException e){
 			e.printStackTrace();
 		}

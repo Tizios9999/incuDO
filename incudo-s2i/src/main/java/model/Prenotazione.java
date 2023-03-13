@@ -5,6 +5,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The Prenotazione class represents a booking made by a user for an activity.
+ * It contains information such as the ID of the booking, the ID of the activity,
+ * the ID of the user who made the booking, and the start and end dates of the booking.
+ */
+
 public class Prenotazione {
 	
 	private Integer id;
@@ -20,6 +26,12 @@ public class Prenotazione {
 		private LocalDate dataInizio;
 		private LocalDate dataFine;
 		
+		/**
+		 * FIELDS_MAP is an Hashmap that links the String array positions that
+		 * will be used to build the Prenotazione object with the object corresponding
+		 * properties. This is for keeping the code more readable.
+		 */
+		
 		private static final Map<Integer, String> FIELDS_MAP = new HashMap<>();
 	    static {
 	    	 FIELDS_MAP.put(0, "id");
@@ -29,6 +41,10 @@ public class Prenotazione {
 	         FIELDS_MAP.put(4, "dataFine");
 	    }
 		
+	    /**
+		 * The PrenotazioneBuilder class is a builder for creating instances of Prenotazione.
+		 */
+	    
 		public PrenotazioneBuilder(String[] data) {
 			
 			for (int i = 0; i < data.length; i++) {
@@ -57,10 +73,22 @@ public class Prenotazione {
 	        }
 		}
 		
+		/**
+		 * Builds and returns a new instance of Prenotazione using the data stored in this builder.
+		 * 
+		 * @return a new instance of Prenotazione
+		 */
+		
 		public Prenotazione build() {
 			return new Prenotazione(this);
 		}
 	}
+	
+	/**
+	 * Constructs a new instance of Prenotazione using the data stored in the given builder.
+	 * 
+	 * @param builder a PrenotazioneBuilder object containing the data to construct the Prenotazione
+	*/
 	
 	private Prenotazione(PrenotazioneBuilder builder) {
 		this.id = builder.id;
@@ -70,6 +98,11 @@ public class Prenotazione {
 		this.dataFine = builder.dataFine;
 	}
 	
+	/**
+	 * The public constructor of prenotazione 
+	 * 
+	 */
+	
 	public Prenotazione(Integer id, Integer idAttività, Integer idUtente, LocalDate dataInizio, LocalDate dataFine) {
 		this.id = id;
 		this.idAttività = idAttività;
@@ -77,6 +110,8 @@ public class Prenotazione {
 		this.dataInizio = dataInizio;
 		this.dataFine = dataFine;
 	}
+	
+	// Getters and Setters
 	
 	public Integer getId() {
 		return id;

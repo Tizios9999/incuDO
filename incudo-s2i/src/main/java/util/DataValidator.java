@@ -4,7 +4,21 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The DataValidator class contains several static methods to validate data against
+ * different types, such as Integer, Date, Alfanumeric, Disponibile, and String.
+ *
+ */
+
 public class DataValidator {
+	
+	/**
+	 * Validates if the given data matches the expected type.
+	 * 
+	 * @param expectedType A String representing the expected type of the data.
+	 * @param data A String containing the data to be validated.
+	 * @return A Boolean representing if the data is valid according to the expected type or not.
+	 */
 	
 	public static Boolean isValidData(String expectedType, String data) {
 		
@@ -49,6 +63,13 @@ public class DataValidator {
 		
 	}
 	
+	/**
+	 * Validates if the given data is a valid Integer.
+	 * 
+	 * @param data A String containing the data to be validated.
+	 * @return A Boolean representing if the data is a valid Integer or not.
+	 */
+	
 	public static Boolean isValidInteger(String data) {
 		
 		Boolean valid = false;
@@ -72,10 +93,16 @@ public class DataValidator {
 		return valid;
 	}
 	
+	/**
+	 * Validates if the given data is a valid Date in the format "dd/MM/yyyy".
+	 * 
+	 * @param data A String containing the data to be validated.
+	 * @return A Boolean representing if the data is a valid Date or not.
+	 */
+	
 	public static Boolean isValidDate(String data) {
 		
 		Boolean valid = false;
-		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
 		try {
@@ -88,17 +115,23 @@ public class DataValidator {
 		
 		} catch(DateTimeParseException e) {
 			
-			valid = false;
-			
+			valid = false;	
 		} 
 		
 		return valid;
 	}
 	
+	/**
+	 * Validates if the given data is a valid Alfanumeric, meaning it only contains
+	 * letters, numbers, and spaces. 
+	 * 
+	 * @param data A String containing the data to be validated.
+	 * @return A Boolean representing if the data is a valid Alfanumeric or not.
+	 */
+	
 	public static Boolean isValidAlfanumeric(String data) {
 		
 		Boolean valid = false;
-		
 		boolean hasSpecialCharacters = data.matches(".*[^a-zA-Z0-9 ].*");
 		
 		if (hasSpecialCharacters) {
@@ -109,6 +142,13 @@ public class DataValidator {
 		
 		return valid;
 	}
+	
+	/**
+	 * Validates if the given data is a valid Disponibile, meaning it is either "SI" or "NO".
+	 *
+	 * @param data A String containing the data to be validated.
+	 * @return A Boolean representing if the data is a valid Disponibile or not.
+	 */
 	
 	public static Boolean isValidDisponibile(String data) {
 		
@@ -122,6 +162,13 @@ public class DataValidator {
 		
 		return valid;
 	}
+	
+	/**
+	 * Validates if the given data is a valid String, meaning it is not null or blank.
+	 * 
+	 * @param data A String containing the data to be validated.
+	 * @return A Boolean representing if the data is a valid String or not.
+	 */
 	
 	public static Boolean isValidString(String data) {
 		

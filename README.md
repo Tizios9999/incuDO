@@ -86,7 +86,7 @@ To get a local copy up and running, follow these simple steps.
 
 - To run the application, use the following command:
 
-      java -jar target/incudo-s2i.jar
+      java -jar target/incuDO-jar-with-dependencies.jar
 
 
 The application should now be running on your machine.

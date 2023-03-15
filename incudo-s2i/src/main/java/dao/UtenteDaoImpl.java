@@ -3,10 +3,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Corso;
 import model.Utente;
-import util.CsvDataManager;
-import util.DataValidator;
 
 /**
 * Implementation of the {@link UtenteDao} interface that manages a list of {@link Utente} objects.

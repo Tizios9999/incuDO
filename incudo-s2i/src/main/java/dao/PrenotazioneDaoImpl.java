@@ -3,10 +3,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Corso;
 import model.Prenotazione;
-import util.CsvDataManager;
-import util.DataValidator;
 
 /**
  * Implementation of the {@link PrenotazioneDao} interface that uses an in-memory

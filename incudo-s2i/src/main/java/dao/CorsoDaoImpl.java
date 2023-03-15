@@ -1,12 +1,10 @@
 package dao;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import model.Corso;
 import util.CsvDataManager;
-import util.DataValidator;
 
 /**
  * Implementation of the CorsoDao interface that provides data access methods

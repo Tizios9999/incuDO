@@ -178,7 +178,7 @@ public void start() {
 			valid = DataValidator.isValidData("Integer", data);
 			
 			if (!valid) {
-				System.out.println("Prego inserire un numero maggiore di 0:");
+				System.out.println("Prego inserire un numero maggiore o uguale a 0:");
 			} 
 		}
 		

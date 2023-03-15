@@ -64,10 +64,10 @@ public class DataValidator {
 	}
 	
 	/**
-	 * Validates if the given data is a valid Integer.
+	 * Validates if the given data is a valid Integer equal or higher than 0.
 	 * 
 	 * @param data A String containing the data to be validated.
-	 * @return A Boolean representing if the data is a valid Integer or not.
+	 * @return A Boolean representing if the data is a valid Integer equal or higher than 0 or not.
 	 */
 	
 	public static Boolean isValidInteger(String data) {
@@ -78,7 +78,7 @@ public class DataValidator {
 				
 			int num = Integer.parseInt(data);
 			
-			if (num > 0) {
+			if (num >= 0) {
 				valid = true;
 			}
 				

@@ -63,8 +63,8 @@ To get a local copy up and running, follow these simple steps.
 
 ### Prerequisites
 
-    Java 11 or higher
-    OPEN CSV 5.0
+    JDK 17 or higher
+    Maven
 
 ### Installation
 

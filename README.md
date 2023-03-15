@@ -1,105 +1,141 @@
-<a name="readme-top"></a>
+<!-- PROJECT LOGO -->
+<br />
 <div align="center">
-  <h1>Java Course Booking App</h1>
-  <p>A Java application that reads from 3 CSV files (corsi.csv, utenti.csv, prenotazioni.csv) the data about course bookings enrolled by participants.</p>
-  <p>The application allows the user to:</p>
-  <ul>
-    <li>Display all the courses in the system</li>
-    <li>Book an existing course</li>
-    <li>Cancel the booking of a course</li>
-    <li>Add a new user</li>
-    <li>Export to a new CSV file the courses that are still available</li>
-  </ul>
+  <a href="https://github.com/your_username/repo_name">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
+  <h2>IncuDO</h2>
+  <h3 align="center">Java Course Booking System</h3>
+  <p align="center">
+    A Java application that reads course booking data from CSV files and allows users to book courses, cancel bookings, add new users, and export available courses to a new CSV file.
+    <br />
+    <a href="https://github.com/your_username/repo_name"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/your_username/repo_name">View Demo</a>
+    ·
+    <a href="https://github.com/your_username/repo_name/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/your_username/repo_name/issues">Request Feature</a>
+  </p>
 </div>
 <!-- TABLE OF CONTENTS -->
-Table of Contents
-
-    About the Project
-    Getting Started
-        Prerequisites
-        Installation
-    Usage
-    Contributing
-    License
-    Contact
-
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 <!-- ABOUT THE PROJECT -->
-About The Project
 
-This Java application reads from 3 CSV files (corsi.csv, utenti.csv, prenotazioni.csv) the data about course bookings enrolled by participants. The application provides functionalities such as booking and cancelling courses as well as adding new users.
+## About The Project
+
+This project is a Java application that reads course booking data from three CSV files (corsi.csv, utenti.csv, prenotazioni.csv) and allows users to book courses, cancel bookings, add new users, and export available courses to a new CSV file.
+
+### Built With
+
+ - Java 17
+ - OPEN CSV 5.0
+
 <!-- GETTING STARTED -->
-Getting Started
 
-To get a local copy of this project up and running follow these simple steps.
-Prerequisites
+## Getting Started
 
-    Java SE Development Kit (JDK) 8 or newer
+To get a local copy up and running, follow these simple steps.
 
-Installation
+### Prerequisites
 
-    Clone the repo
+    Java 11 or higher
+    OPEN CSV 5.0
+
+### Installation
+
+- Install JDK 17 or later on your machine. You can download it from the official website: https://www.oracle.com/java/technologies/downloads/
+
+- Install Maven on your machine. You can download it from the official website: https://maven.apache.org/download.cgi
+
+- Clone the repository to your local machine using Git. You can do this by running the following command in your terminal:
+
+	  git clone https://github.com/Tizios9999/incuDO.git
+
+- Navigate to the root directory of the project.
+
+- Run the following command to build the project:
+
+      mvn clean package
+
+  This will compile the source code, run the tests, and create a JAR file in the target/ directory.
+
+- To run the application, use the following command:
+
+      java -jar target/incudo-s2i.jar
 
 
-git clone https://github.com/your_username_/Project-Name.git
-
-Navigate to the project directory
-
-cd Project-Name
-
-Compile the java files
-
-javac *.java
-
-Run the application
-
-    java Main
+The application should now be running on your machine.
 
 <!-- USAGE EXAMPLES -->
-Usage
 
-The Java application provides a user interface to interact with the course booking functionalities.
+## Usage
 
-    Display all the courses in the system.
+Use the application to:
 
+- Display all the courses in the system.
+- Book an existing course.
+- Cancel the booking of a course.
+- Add a new user.
+- Export to a new CSV file the courses that are still available.
 
-Select 1 to display all courses
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<!-- ROADMAP -->
 
-Book an existing course.
+## Roadmap
 
-Select 2 to book a course
-
-Cancel the booking of a course.
-
-Select 3 to cancel a course booking
-
-Add a new user.
-
-Select 4 to add a new user
-
-Export to a new CSV file the courses that are still available.
-
-    Select 5 to export available courses to a CSV file
-
+See the open issues for a list of proposed features (and known issues).
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 <!-- CONTRIBUTING -->
-Contributing
 
-Contributions are what make the open source community a fantastic place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+## Contributing
 
-    Fork the Project
-    Create your Feature Branch (git checkout -b feature/AmazingFeature)
-    Commit your Changes (git commit -m 'Add some AmazingFeature')
-    Push to the Branch (git push origin feature/AmazingFeature)
-    Open a Pull Request
 
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 <!-- LICENSE -->
-License
+
+## License
 
 Distributed under the MIT License. See LICENSE for more information.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 <!-- CONTACT -->
-Contact
 
-Your Name - email@example.com
+## Contact
 
-Project Link: https://github.com/your_username/Project-Name
+Davide Santonocito - davide.santonocito@outlook.com
+
+Project Link: https://github.com/Tizios9999/incuDO.git
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<!-- ACKNOWLEDGMENTS -->
+
+## Acknowledgments
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

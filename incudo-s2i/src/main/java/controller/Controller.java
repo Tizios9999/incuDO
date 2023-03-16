@@ -128,6 +128,8 @@ public void start() {
 			
 			service.exportCorsoCsvTable();
 			
+			System.out.println("File con corsi disponibili creato.");
+			
 			waitForConfirmation();
 			break;
 		case 0:

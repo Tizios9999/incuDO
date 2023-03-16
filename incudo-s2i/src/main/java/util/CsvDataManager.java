@@ -1,8 +1,9 @@
 package util;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -31,26 +32,34 @@ public class CsvDataManager {
 	
 	public ArrayList<String[]> loadFromCsv(String csvFile, String[][] fieldsTable) {
 			
-		String csvPath = "src\\main\\resources\\" + csvFile;
-        ArrayList<String[]> table = new ArrayList<String[]>();
-        
-        try {
+		// Get the class loader of the current class
+		
+				ClassLoader classLoader = getClass().getClassLoader();
+		
+				// Get an input stream for the file inside the resources folder or the JAR file
+				
+				InputStream input = classLoader.getResourceAsStream(csvFile);
+		        ArrayList<String[]> table = new ArrayList<String[]>();
+		        
+		        try {
 
-            FileReader filereader = new FileReader(csvPath);
-      
-            CSVParser parser = new CSVParserBuilder()
-            						.withSeparator(';')
-            						.withQuoteChar('"')
-            						.withIgnoreQuotations(false)
-            						.build();
-      
-            CSVReader csvReader = new CSVReaderBuilder(filereader)
-                                      .withCSVParser(parser)
-                                      .withSkipLines(1)
-                                      .build();
-      
+		            // Use an InputStreamReader to read from the input stream
+		        
+		        	InputStreamReader reader = new InputStreamReader(input);
+		      
+		            CSVParser parser = new CSVParserBuilder()
+		            						.withSeparator(';')
+		            						.withQuoteChar('"')
+		            						.withIgnoreQuotations(false)
+		            						.build();
+		      
+		            CSVReader csvReader = new CSVReaderBuilder(reader)
+		                                      .withCSVParser(parser)
+		                                      .withSkipLines(1)
+		                                      .build();
+		      
 
-            List<String[]> allData = csvReader.readAll();
+		            List<String[]> allData = csvReader.readAll();
       
             for (String[] row : allData) {
 

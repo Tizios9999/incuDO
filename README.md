@@ -1,22 +1,19 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/your_username/repo_name">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
   <h2>IncuDO</h2>
   <h3 align="center">Java Course Booking System</h3>
   <p align="center">
     A Java application that reads course booking data from CSV files and allows users to book courses, cancel bookings, add new users, and export available courses to a new CSV file.
     <br />
-    <a href="https://github.com/your_username/repo_name"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Tizios9999/incuDO"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/your_username/repo_name">View Demo</a>
+    <a href="https://github.com/Tizios9999/incuDO">View Demo</a>
     ·
-    <a href="https://github.com/your_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/Tizios9999/incuDO/issues">Report Bug</a>
     ·
-    <a href="https://github.com/your_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/Tizios9999/incuDO/issues">Request Feature</a>
   </p>
 </div>
 <!-- TABLE OF CONTENTS -->
